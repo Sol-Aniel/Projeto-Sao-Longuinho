@@ -1,0 +1,35 @@
+from flask import Blueprint, Response, render_template, redirect, url_for, request, session, flash, abort, make_response
+
+administradores = Blueprint('admin',__name__)
+
+@administradores.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@administradores.route('/equipes')
+def equipes():
+    return render_template('equipes.html')
+
+@administradores.route('/equipes/add/<int:id>', methods=['GET', 'POST'])
+def add_equipes():
+    return render_template('add_equipes.html')
+
+@administradores.route('/equipes/edit/<int:id>', methods=['GET', 'POST'])
+def edit_equipes():
+    return render_template('edit_equipes.html')
+
+@administradores.route('/solicitacoes', methods=['GET', 'POST'])
+def solicitacoes():
+    return render_template('solicitacoes.html')
+
+@administradores.route('/funcionarios')
+def funcionarios():
+    return render_template('funcionarios.html')
+
+@administradores.route('/funcionarios/add/<int:id>', methods=['GET', 'POST'])
+def add_funcionarios():
+    return render_template('add_funcionarios.html')
+
+@administradores.route('/funcionarios/edit/<int:id>', methods=['GET', 'POST'])
+def edit_funcionarios():
+    return render_template('edit_funcionarios.html')
