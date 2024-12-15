@@ -6,7 +6,7 @@ class Objetos(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False, index=True)
-    photo = db.Column(db.LargeBinary, nullable=False)
+    photo = db.Column(db.LargeBinary)
     client_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False, index=True)
     category_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False, index=True)
     description = db.Column(db.Text, nullable=False)
