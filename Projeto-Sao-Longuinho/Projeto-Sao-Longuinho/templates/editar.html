@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>editar perifl</title>
+ 
+</head>
+<body>
+   
+      <h2>editar perfil</h2>
+      <form action="{{ url_for('func.perfil', id=id, tipo='livro') }}" method="POST">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" value="{{ name }}" >
+
+        <label for="equipe">Equipe</label>
+        <select id="equipe" name="equipe" value="{{ equipe }}">
+            {% for equipe in equipes %}
+                <option value="{{ equipe.id }}">{{ equipe.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="tipo">Tipo</label>
+        <select id="tipo" name="tipo" value="{{ tipo }}" >
+            {% for tipo in tipos %}
+                <option value="{{ tipo.id }}">{{ tipo.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="email"> Email </label>
+        <input type="email" id="email" name="email" value="{{ email }}" >
+
+
+        <label for="phone"> Telefone </label>
+        <input type="number" id="phone" name="phone" value="{{ phone }}">
+
+        <label for="salary"> Salário </label>
+        <input type="number" id="salary" name="salary" value="{{ salary }}">
+
+        <label for="adress"> Endereço </label>
+        <input type="number" id="adress" name="adress" value="{{ adress }}">
+
+        <label for="password_hash"> Senha </label>
+        <input type="password" id="password_hash" name="password_hash" value="{{ password_hash }}">
+
+        
+          <button type="submit">Atualizar Perfilk</button>
+     
+      </form>
+</body>
+</html>
