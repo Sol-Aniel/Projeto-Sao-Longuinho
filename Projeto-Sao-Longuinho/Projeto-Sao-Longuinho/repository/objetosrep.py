@@ -11,8 +11,7 @@ class ObjetosRepository:
         return self.OBJETOSdao.get_objeto(id)
     
     def get_objetos(self):
-        objetos = self.OBJETOSdao.get_objeto()
-        return ([objeto.toJson() for objeto in objetos])
+        return self.OBJETOSdao.get_objeto()
     
     def get_objetos_by(self, by, value):
         return self.OBJETOSdao.get_objetos_by(by, value)
@@ -25,9 +24,6 @@ class ObjetosRepository:
     
     def delete_objeto(self, id):
         return self.OBJETOSdao.add_objeto(id)
-
-    def get_objetos_by_status(self, status):
-        return self.OBJETOSdao.get_objetos_by_status(status)
 
     def update_status(self, id, status):
         return self.OBJETOSdao.update_status(id, status)

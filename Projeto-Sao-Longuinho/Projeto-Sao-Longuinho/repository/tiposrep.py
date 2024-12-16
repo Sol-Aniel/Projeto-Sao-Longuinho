@@ -11,8 +11,7 @@ class TiposRepository:
         return self.TIPOSdao.get_tipo(id)
     
     def get_tipos(self):
-        tipos = self.TIPOSdao.get_tipo()
-        return ([tipo.toJson() for tipo in tipos])
+        return self.TIPOSdao.get_tipos()
 
     def add_tipo(self, name):
         return self.TIPOSdao.add_tipo(name)

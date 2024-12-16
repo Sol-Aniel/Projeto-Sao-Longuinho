@@ -11,7 +11,7 @@ class ClientesRepository:
         return self.CLIENTESdao.get_cliente(id)
     
     def get_clientes(self):
-        return self.CLIENTESdao.get_cliente()
+        return self.CLIENTESdao.get_clientes()
     
     def get_clientes_by(self, by, value):
         return self.CLIENTESdao.get_clientes_by(by, value)

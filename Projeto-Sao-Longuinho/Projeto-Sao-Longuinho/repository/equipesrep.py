@@ -11,8 +11,7 @@ class EquipesRepository:
         return self.EQUIPESdao.get_equipe(id)
     
     def get_equipes(self):
-        equipes = self.EQUIPESdao.get_equipe()
-        return ([equipe.toJson() for equipe in equipes])
+        return self.EQUIPESdao.get_equipes()
     
     def get_equipes_by(self, by, value):
         return self.EQUIPESdao.get_equipe(by, value)

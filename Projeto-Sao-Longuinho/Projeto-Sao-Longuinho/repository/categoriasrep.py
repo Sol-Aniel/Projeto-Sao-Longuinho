@@ -11,7 +11,7 @@ class CategoriasRepository:
         return self.CATEGORIASdao.get_categoria(id)
     
     def get_categorias(self):
-        return self.CATEGORIASdao.get_categoria()
+        return self.CATEGORIASdao.get_categorias()
 
     def add_categoria(self, name):
         return self.CATEGORIASdao.add_categoria(name)

@@ -11,23 +11,10 @@ class FuncionariosRepository:
         return self.FUNCdao.get_funcionario(id)
     
     def get_funcionarios(self):
-        funcionarios = self.FUNCdao.get_funcionario()
-        return ([funcionario.toJson() for funcionario in funcionarios])
+        return self.FUNCdao.get_funcionarios()
     
     def get_funcionarios_by(self, by, value):
         return self.FUNCdao.get_funcionarios_by(by, value)
-    
-    def get_func_by_id(self, id):
-        listafunc = []
-        listafunc.extend([self.funcDao.get_func_by_id(id)])
-        funcjson = []
-        for funcionario in listafunc:
-            funcjson.extend([funcionario.toJson()])
-            equipes = self.equipesDao.get_equipe(funcionario.team_id)
-            tipos = self.tiposDao.get_tipo(funcionario.type_id)
-            funcjson[funcionario.id-1]["equipe"] = equipes.name
-            funcjson[funcionario.id-1]["tipo"] = tipos.name
-        return funcjson
 
     def check_password(self, password, password_hash):
         return self.FUNCdao.check_password(password, password_hash)
