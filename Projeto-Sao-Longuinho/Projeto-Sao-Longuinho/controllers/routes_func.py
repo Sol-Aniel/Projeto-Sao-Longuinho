@@ -4,11 +4,6 @@ from database import db, init_db
 from repository import funcrep, objetosrep, equipesrep, tiposrep
 
 funcionarios = Blueprint('func',__name__)
-funcrep = funcrep()
-objetosrep = objetosrep()
-equipesrep = equipesrep()
-tiposrep = tiposrep()
-
 
 @funcionarios.before_request
 def verifica():
