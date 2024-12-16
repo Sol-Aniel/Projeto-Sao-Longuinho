@@ -11,6 +11,53 @@ Banco de dados com tabelas para usuários, objetos perdidos/encontrados e locali
 
 O SQLAlchemy, por si só, não possui um tipo de coluna específico para armazenar arquivos de imagem diretamente no banco de dados. No entanto, você pode usar o tipo LargeBinary para armazenar arquivos binários, como imagens, no banco de dados.
 
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fotos.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+
+@app.route('/upload', methods=['POST'])
+def upload_foto():
+    if 'foto' not in request.files:
+        return jsonify({'erro': 'Nenhum arquivo enviado'}), 400
+
+    foto = request.files['foto']
+    nome = foto.filename
+    tipo = foto.content_type
+    dados = foto.read()
+
+    nova_foto = Foto(nome=nome, tipo=tipo, dados=dados)
+    db.session.add(nova_foto)
+    db.session.commit()
+
+    return jsonify({'mensagem': 'Foto salva com sucesso', 'id': nova_foto.id}), 201
+
+ +++++++++
+
+@app.route('/image/<int:image_id>')
+def get_image(image_id):
+    image = Image.query.get_or_404(image_id)
+
+    # Obter os primeiros bytes da imagem
+    image_data = image.data
+    image_header = image_data[:8]  # A primeira parte do arquivo (pode ser 8 bytes)
+
+    # Verificação dos tipos de imagem baseados nos primeiros bytes
+    if image_header[:2] == b'\xFF\xD8':  # JPEG
+        mime_type = 'image/jpeg'
+    elif image_header[:4] == b'\x89\x50\x4E\x47':  # PNG
+        mime_type = 'image/png'
+    elif image_header[:6] == b'GIF87a' or image_header[:6] == b'GIF89a':  # GIF
+        mime_type = 'image/gif'
+    else:
+        # Se não for um tipo de imagem suportado
+        return "Formato de imagem não suportado", 400
+
+    # Retorna a imagem com o Content-Type correto
+    return image.data, 200, {'Content-Type': mime_type}
+    
 1. Como usar o LargeBinary
 O LargeBinary armazena dados binários como blobs. Você pode usá-lo para salvar imagens diretamente no banco de dados.
 
