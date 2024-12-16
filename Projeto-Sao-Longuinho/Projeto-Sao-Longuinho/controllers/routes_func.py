@@ -1,7 +1,7 @@
 from flask import Blueprint, Response, render_template, redirect, url_for, request, session, flash, abort, make_response
 from models import *
 from database import db, init_db
-from repository import funcrep, objetosrep, equipesrep, tiposrep
+from repository import *
 
 funcionarios = Blueprint('func',__name__)
 
