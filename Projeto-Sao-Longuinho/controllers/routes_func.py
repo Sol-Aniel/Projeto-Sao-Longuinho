@@ -9,12 +9,6 @@ funcionarios = Blueprint('func',__name__)
 def verifica():
     if session.get('acess') != 'func':
         return abort(403)
-    
-# armazenando dados na sessão
-def sessionfunc(funcionario):
-    session['id'] = funcionario.id
-    session['name'] = funcionario.name
-    session['acess'] = 'func'
 
 @funcionarios.route('/painel/worker')
 def painel_worker():
@@ -22,35 +16,30 @@ def painel_worker():
 
 @funcionarios.route('/sua-equipe')
 def equipe():
-    # caso haja tentativa de acesso nao autenticado pela rota
     funcionario_id = session.get('id')  
-    if not funcionario_id:
-        flash("Usuário não está logado.", "error")
-        return redirect(url_for('func.painel_worker'))
-     
-    funcionario = Funcionarios.query.get(funcionario_id)
-    equipe = funcionario.equipes  
+    funcionario = func_rep.get_funcionario(funcionario_id)
+    equipe_id = funcionario.team_id
+    equipe = equipes_rep.get_equipe(equipe_id)
     return render_template('equipe.html', equipe=equipe)
-
 
 @funcionarios.route('/pendentes')
 def pendentes():
-    objetos_pendentes = objetosrep.get_objetos_by_status('pendente')
+    objetos_pendentes = objetos_rep.get_objetos_by('found', False)
     return render_template('pendentes.html', objetos=objetos_pendentes)
 
 @funcionarios.route('/achados')
 def achados():
-    objetos_achados = objetosrep.get_objetos_by_status('achado')
+    objetos_achados = objetos_rep.get_objetos_by('found', True)
     return render_template('achados.html', objetos=objetos_achados)
 
 @funcionarios.route('/alterar-status/<int:id>', methods=['POST'])
 def modstatus(id):
-    sucesso = objetosrep.update_status(id, 'achado')
-    if sucesso:
+    sucesso = objetosrep.update_found(id, True)
+    if sucesso == True:
         flash("Ojeto dado como achado.", "success")
-        return render_template('achados.html', sucesso=sucesso)
+        return redirect(url_for('func.achados', sucesso=sucesso))
     else:
-        flash("Não foi possível atualizar o status do objeto", "error")
+        flash("Não foi possível atualizar o status do objeto", "danger")
     return redirect(url_for('func.pendentes'))
 
 @funcionarios.route('/perfil/worker', methods=['GET', 'POST'])
@@ -63,20 +52,23 @@ def perfil():
         phone = request.form['phone']
         salary = request.form['salary']
         adress = request.form['adress']
-        password_hash = request.form['password_hash']
+        password = request.form['password']
+        id = session.get('id')
        
-        funcrep.mod_funcionario(id, name, team_id, type_id, email, phone, salary, adress, password_hash)
-        mensagem = 'Seu perfil foi atualizado!'
-        return redirect(url_for('func.painel_worker', mensagem=mensagem))
+        func_rep.mod_funcionario(id, name, team_id, type_id, email, phone, salary, adress, password)
+        flash('Seu perfil foi atualizado!', 'sucess')
+        return redirect(url_for('func.painel_worker'))
     else:
-        name = funcrep.get_func_by_id(id)
-        team_id = equipesrep.get_equipe(funcionarios.id)
-        team_id = funcionarios.team_id
-        type_id = tiposrep.get_tipo(funcionarios.id)
-        type_id = funcionarios.type_id
-        email = email.name
-        phone = phone.name
-        salary = salary.name
-        adress = adress.name
-        password_hash = password_hash.name
-        return render_template('editar.html', id=id, name=name, team_id=team_id, type_id=type_id, email=email, phone=phone, salary=salary, adress=adress, password_hash=password_hash)
+        id = session.get('id')
+        func = func_rep.get_funcionario(id)
+        name = func.name
+        team = equipes_rep.get_equipe(func.team_id)
+        team = team.name
+        type_ = tiposrep.get_tipo(func.type_id)
+        type_ = type_.name
+        email = func.email
+        phone = func.phone
+        salary = func.salary
+        adress = func.adress
+        password_hash = func.password_hash
+        return render_template('editar.html', name=name, team_id=team_id, type_id=type_id, email=email, phone=phone, salary=salary, adress=adress, password_hash=password_hash)

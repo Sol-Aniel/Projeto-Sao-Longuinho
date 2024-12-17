@@ -15,7 +15,7 @@ class OBJETOSdao:
 
     @staticmethod
     def get_objetos_by(by, value):
-        return Objetos.filter(Objetos.by == value).all()
+        return Objetos.filter(getattr(Objetos, by) == value).all()
     
     @staticmethod
     def add_objeto(title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments):
@@ -64,16 +64,10 @@ class OBJETOSdao:
             return e
 
     @staticmethod
-    def get_objetos_by_status(status):
-        return Objetos.query.filter_by(found=(status == 'achado')).all()
-
-    @staticmethod
-    def update_status(id, status):
+    def update_found(id, found):
         try:
-            objeto = Objetos.query.get(id)
-            if not objeto:
-                return None
-            objeto.found = (status == 'achado')  # True para 'achado', False para 'pendente'
+            objeto = OBJETOSdao.get_objeto(id)
+            objeto.found = found  # True para 'achado', False para 'pendente'
             db.session.commit()
             return True
         except Exception as e:

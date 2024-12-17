@@ -15,7 +15,7 @@ class ADMINdao:
 
     @staticmethod
     def get_admin_by(by, value):
-        return Administradores.filter(Administradores.by == value).all()
+        return Administradores.filter(getattr(Administradores, by) == value).all()
 
     @staticmethod
     def set_email(email):

@@ -16,8 +16,8 @@ tipos_rep = TiposRepository()
 
 def validarUser (email, senha):
     admin = admin_rep.get_admin_by('email', email)
-    func = func_rep.get_func_by('email', email)
-    cliente = clientes_rep.get_cliente_by('email', email)
+    func = func_rep.get_funcionarios_by('email', email)
+    cliente = clientes_rep.get_clientes_by('email', email)
     senha_hash = admin.password_hash
     if admin and admin_rep.check_password(senha, senha_hash):
         return 'admin'

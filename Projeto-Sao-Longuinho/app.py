@@ -29,4 +29,4 @@ def handle_generic_error(e):
 
 if __name__ == "__main__":
     init_db(app)
-    app.run()
+    app.run(debug=True)

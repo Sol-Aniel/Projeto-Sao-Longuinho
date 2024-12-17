@@ -15,7 +15,7 @@ class EQUIPESdao:
 
     @staticmethod
     def get_equipes_by(by, value):
-        return Equipes.filter(Equipes.by == value).all()
+        return Equipes.filter(getattr(Equipes, by) == value).all()
     
     @staticmethod
     def add_equipe(name):

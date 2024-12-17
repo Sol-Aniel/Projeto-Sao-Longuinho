@@ -5,6 +5,12 @@ from database import db, init_db
 
 geral = Blueprint('geral',__name__)
 
+# armazenando dados na sessão
+def sessionuser(user):
+    session['id'] = user.id
+    session['name'] = user.name
+    session['acess'] = 'func'
+
 @geral.route('/')
 def index():
     return render_template('index.html')
@@ -22,14 +28,20 @@ def login():
             if acess == 'admin':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
+                user = admin_rep.get_admin_by('email', email)
+                sessionuser(user)
                 return redirect(url_for('admin.dashboard'))
             elif acess == 'cliente':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
+                user = clientes_rep.get_clientes_by('email', email)
+                sessionuser(user)
                 return redirect(url_for('cliente.painel'))
             elif acess == 'func':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
+                user = func_rep.get_funcionarios_by('email', email)
+                sessionuser(user)
                 return redirect(url_for('func.painel_worker'))
             else:
                 flash('Usuário não encontrado ou senha incorreta', 'danger')

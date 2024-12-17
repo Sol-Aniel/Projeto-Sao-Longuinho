@@ -15,11 +15,7 @@ class FUNCdao:
 
     @staticmethod
     def get_funcionarios_by(by, value):
-        return Funcionarios.filter(Funcionarios.by == value).all()
-    
-    @staticmethod
-    def get_func_by_id(id):
-        return Funcionarios.query.get(id)
+        return Funcionarios.filter(getattr(Funcionarios, by) == value).all()
 
     @staticmethod
     def set_email(email):
