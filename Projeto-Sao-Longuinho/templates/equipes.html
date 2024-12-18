@@ -9,27 +9,23 @@
 <body>
     <thead>
         <tr>
-        <th>Equipes</tr>
+            <th>Nome</th>
+            <th>Funcionários</th>   
+            <th>Objetos</th>
+           
         </tr>
         <tbody>
             {% for e in equipes %}
             <tr>
-                <td>{{ f.name }}</td>
-
+                <td>{{ e.name }}</td>
+                <td>{{ e.funcionarios }}</td>
+                <td>{{ e.objetos }}</td>
             </tr>
             {% endfor %}
     </thead>
-        <h1>Sua Equipe</h1>
-        {% if equipe %}
-            <h2>Equipe: {{ equipe.name }}</h2>
-            <h3>Membros:</h3>
-            <ul>
-                {% for membro in equipe.funcionarios %}
-                    <li>{{ membro.name }} - {{ membro.email }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Você não pertence a nenhuma equipe.</p>
-        {% endif %}
+    <div class="alterar">
+        <a href="/equipe/add/">Adicionar Equipe</a>  <!--links para rotas de alteração-->
+        <a href="/equipe/edit/">Editar Equipe</a>
+    </div>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div>
+        <h1>Editar Equipes:</h1>
+        <form method="POST" action="/equipes/edit/">
+        <label for="nome">Nome:</label>
+        <input type="name" id="nome" value="{{ equipe.name }}" required>
+        <label for="email">Funcionários:</label>
+        <input type="email" id="email" value="{{ equipe.funcionarios }}" required> 
+        <label for="phone">Objetos:</label>
+        <input type="tel" id="phone" value="{{ equipe.objetos }}" required>
+        <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background:  linear-gradient(135deg, #3CB371, #90EE90);	;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    
+    .title {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .title h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0;
+    }
+    
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .funcoes {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .funcoes a {
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    
+    .funcoes a:hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+    }
+    
+    .funcoes a:focus {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+    }
+    .title img {
+        position: absolute;
+        top: 30;
+        left: 5;
+        height: 40%;
+        width: auto;
+        object-fit: cover;
+        z-index: -1; /* Coloca a imagem atrás do conteúdo */
+    }
+    
+</style>
+
+<body>
+    
+    <div class="title">
+        <img src="LONGUINHO.png"></img>
+        <h1>Longuinho Finders</h1>
+        </div>
+         <p>Bem vindo!</p>
+        <div class="funcoes">
+           <a href="\solicitar">Solicitar</a>
+           <a href="\pedidos">Pedidos</a>
+           <a href="\perfil">Perfil</a>
+        </div>
+    </div>
+</body>
+</html>

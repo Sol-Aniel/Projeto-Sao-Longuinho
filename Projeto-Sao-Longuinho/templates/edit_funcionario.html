@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+    <body>
+        <h1>Editar Funcionários</h1>
+       <form action="/funcionarios/edit/">
+       <label for="nome">Nome:</label>
+       <input type="name" id="nome" value="{{ funcionario.name }}" required>
+       <label for="email">Nome:</label>
+       <input type="email" id="email" value="{{ funcionario.email }}" required> 
+       <label for="phone">Nome:</label>
+       <input type="tel" id="phone" value="{{ funcionario.phone }}" required>
+       <label for="team">Equipe:</label>
+       <input type="text" id="team" value="{{ funcionario.team }}" required>
+       <label for="salary">Salário:</label>
+       <input type="number" id="salary" value="{{ funcionario.salary }}" required> 
+       <label for="adress">Endereço:</label>
+       <input type="adress" id="adress" value="{{ funcionario.adress }}" required>
+       <label for="type_id">Cargo:</label>
+       <input type="text" id="type_id" value="{{ funcionario.type }}" required>
+       <button type="submit">Salvar Alterações</button>
+       </form>
+
+</html>
