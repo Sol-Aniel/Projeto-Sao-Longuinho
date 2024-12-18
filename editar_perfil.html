@@ -1,0 +1,24 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="exibir">
+   <h3>Deseja editar suas informações de cadastro?</h3>
+   <form method="POST" action="/perfil">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome">
+    <label for="email">Email:</label>
+    <input type="email" id="email">
+    <label for="adress">Endereço:</label>
+    <input type="text" id="adress">
+    <label for="phone">Telefone:</label>
+    <input type="tel" id="phone">
+    <label for="senha_hash">Telefone:</label>
+    <input type="password" id="senha_hash">
+    <button type="submit">Salvar</button>
+   </div>
+</body>
+</html>

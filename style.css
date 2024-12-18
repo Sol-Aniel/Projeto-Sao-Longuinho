@@ -1,0 +1,187 @@
+/* Resetando margens e preenchimentos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+/* Menu */
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #004c00;
+    color: white;
+}
+
+/* Logo */
+.logo img {
+    width: 50px;
+    height: auto;
+}
+
+/* Barra de navegação */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav h1 {
+    font-size: 24px;
+    margin-right: 30px;
+    color: white;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #800044; /* Cor de destaque ao passar o mouse */
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    /* Alinhar logo e menu para tela menor */
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav h1 {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav a {
+        margin: 5px 0;
+    }
+}
+
+/* Estilo geral */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Imagem no canto esquerdo preenchendo toda a vertical */
+.title img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    z-index: -1; /* Coloca a imagem atrás do conteúdo */
+}
+
+/* Centralizar div exibir */
+.exibir {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.exibir h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.exibir table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.exibir td {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.funcoes {
+    display: flex;
+    gap: 20px;
+}
+
+.funcoes a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.funcoes a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.funcoes a:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+.alterar a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.alterar a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.alterar a:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}

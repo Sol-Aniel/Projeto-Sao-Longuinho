@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionários</title>
+</head>
+
+<body>
+
+    <div class="exibir">
+    <h1>Funcionários</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>    <!--Informações Padrão-->
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th>Salário</th>
+                <th>Time</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in funcionarios %} <!-- Loop para listar os funcionários -->
+            <tr>
+                <td>{{ f.nome }}</td>     <!-- nome do funcionario-->
+                <td>{{ f.email }}</td>    <!-- email do funcionario-->
+                <td>{{ f.adress }}</td>   <!-- endereço do funcionario-->
+                <td>{{ f.phone }}</td>    <!-- telefone do funcionario-->
+                <td>{{ f.salary }}</td>   <!-- salário do funcionario-->
+                <td>{{ f.team_id }}</td>  <!-- equipe do funcionario-->
+                <td>{{ f.type_id }}</td>  <!-- cargo do funcionário-->
+            </tr>
+            {% endfor %} <!--  encerramento do loop -->
+        </tbody>
+    </table>
+
+    <div class="alterar">
+        <a href="/funcionarios/add/">Adicionar novo Funcionário</a>  <!--links para rotas de alteração-->
+        <a href="/funcionarios/edit/">Editar Lista</a>
+    </div>
+
+</div>
+</body>
+</html>
