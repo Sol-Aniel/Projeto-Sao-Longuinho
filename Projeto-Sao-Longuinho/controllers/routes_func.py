@@ -34,30 +34,38 @@ def achados():
 
 @funcionarios.route('/alterar-status/<int:id>', methods=['POST'])
 def modstatus(id):
-    sucesso = objetosrep.update_found(id, True)
+    sucesso = objetos_rep.update_found(id, True)
     if sucesso == True:
         flash("Ojeto dado como achado.", "success")
-        return redirect(url_for('func.achados', sucesso=sucesso))
+        return redirect(url_for('func.achados'))
     else:
-        flash("Não foi possível atualizar o status do objeto", "danger")
-    return redirect(url_for('func.pendentes'))
+        flash(sucesso, "danger")
+        return redirect(url_for('func.pendentes'))
 
 @funcionarios.route('/perfil/worker', methods=['GET', 'POST'])
 def perfil():
     if request.method == 'POST':
-        name = request.form['name']
+        name = request.form['nome']
         team_id = request.form['team_id']
         type_id = request.form['type_id']
         email = request.form['email']
-        phone = request.form['phone']
-        salary = request.form['salary']
-        adress = request.form['adress']
-        password = request.form['password']
+        phone = request.form['telefone']
+        salary = request.form['salario']
+        adress = request.form['endereco']
+        senha = request.form['senha']
         id = session.get('id')
-       
-        func_rep.mod_funcionario(id, name, team_id, type_id, email, phone, salary, adress, password)
-        flash('Seu perfil foi atualizado!', 'sucess')
-        return redirect(url_for('func.painel_worker'))
+        validade, mensagem = validarSenha(senha)
+        if validade == True:
+            sucesso = func_rep.mod_funcionario(id, name, team_id, type_id, email, phone, salary, adress, senha)
+            if sucesso == True:
+                flash('Seu perfil foi atualizado!', 'sucess')
+                return redirect(url_for('func.painel_worker'))
+            else:
+                flash(sucesso, "danger")
+                return render_template('perfil_w.html')
+        else:
+            flash(mensagem, 'danger')
+            return render_template('perfil_w.html')
     else:
         id = session.get('id')
         func = func_rep.get_funcionario(id)
@@ -71,4 +79,4 @@ def perfil():
         salary = func.salary
         adress = func.adress
         password_hash = func.password_hash
-        return render_template('editar.html', name=name, team_id=team_id, type_id=type_id, email=email, phone=phone, salary=salary, adress=adress, password_hash=password_hash)
+        return render_template('perfil_w.html', name=name, team_id=team_id, type_id=type_id, email=email, phone=phone, salary=salary, adress=adress, password_hash=password_hash)

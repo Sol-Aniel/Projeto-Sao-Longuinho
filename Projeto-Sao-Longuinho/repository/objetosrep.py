@@ -16,11 +16,11 @@ class ObjetosRepository:
     def get_objetos_by(self, by, value):
         return self.OBJETOSdao.get_objetos_by(by, value)
 
-    def add_objeto(self, title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments):
-        return self.OBJETOSdao.add_objeto(title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments)
+    def add_objeto(self, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments):
+        return self.OBJETOSdao.add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments)
     
-    def mod_objeto(self, id, title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments):
-        return self.OBJETOSdao.mod_objeto(id, title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments)
+    def mod_objeto(self, id, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments):
+        return self.OBJETOSdao.mod_objeto(id, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments)
     
     def delete_objeto(self, id):
         return self.OBJETOSdao.add_objeto(id)

@@ -15,12 +15,12 @@ class OBJETOSdao:
 
     @staticmethod
     def get_objetos_by(by, value):
-        return Objetos.filter(getattr(Objetos, by) == value).all()
+        return Objetos.query.filter(getattr(Objetos, by) == value).all()
     
     @staticmethod
-    def add_objeto(title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments):
+    def add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments):
         try:
-            objeto = Objetos(title = title, photo = photo, client_id = client_id, category_id = category_id, description = description, team = team, found = found, plural = plural, size = size, weight = weight, lost_local = lost_local, lost_date = lost_date, comments = comments)
+            objeto = Objetos(title = title, photo = photo, client_id = client_id, category_id = category_id, description = description, team_id = team_id, found = found, plural = plural, size = size, weight = weight, lost_local = lost_local, lost_date = lost_date, comments = comments)
             db.session.add(objeto)
             db.session.commit()
             return True
@@ -40,7 +40,7 @@ class OBJETOSdao:
             return e
 
     @staticmethod
-    def mod_objeto(id, title, photo, client_id, category_id, description, team, found, plural, size, weight, lost_local, lost_date, comments):
+    def mod_objeto(id, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments):
         try:
             objeto = OBJETOSdao.get_objeto(id)  
             objeto.id = id
@@ -49,7 +49,7 @@ class OBJETOSdao:
             objeto.client_id = client_id
             objeto.category_id = category_id
             objeto.description = description
-            objeto.team = team
+            objeto.team_id = team_id
             objeto.found = found
             objeto.plural = plural
             objeto.size = size

@@ -15,7 +15,7 @@ class CLIENTESdao:
 
     @staticmethod
     def get_clientes_by(by, value):
-        return Clientes.filter(getattr(Clientes, by) == value).all()
+        return Clientes.query.filter(getattr(Clientes, by) == value).all()
 
     @staticmethod
     def set_email(email):
