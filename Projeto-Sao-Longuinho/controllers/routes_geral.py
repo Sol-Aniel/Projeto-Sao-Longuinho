@@ -7,9 +7,8 @@ geral = Blueprint('geral',__name__)
 
 # armazenando dados na sessão
 def sessionuser(user):
-    for user in user:
-        session['id'] = user.id
-        session['name'] = user.name
+    session['id'] = user.id
+    session['name'] = user.name
 
 @geral.route('/')
 def index():
@@ -54,19 +53,19 @@ def login():
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
                 user = admin_rep.get_admin_by('email', email)
-                sessionuser(user)
+                sessionuser(user[0])
                 return redirect(url_for('admin.dashboard'))
             elif acess == 'cliente':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
                 user = clientes_rep.get_clientes_by('email', email)
-                sessionuser(user)
+                sessionuser(user[0])
                 return redirect(url_for('cliente.painel'))
             elif acess == 'func':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
                 user = func_rep.get_funcionarios_by('email', email)
-                sessionuser(user)
+                sessionuser(user[0])
                 return redirect(url_for('func.painel_worker'))
             else:
                 flash('Usuário não encontrado ou senha incorreta', 'danger')

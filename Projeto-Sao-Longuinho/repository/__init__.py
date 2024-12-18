@@ -18,12 +18,14 @@ def validarUser (email, senha):
     admin = admin_rep.get_admin_by('email', email)
     func = func_rep.get_funcionarios_by('email', email)
     cliente = clientes_rep.get_clientes_by('email', email)
-    for admin in admin:
-        asenha_hash = admin.password_hash
-    for func in func:
-        fsenha_hash = func.password_hash
-    for cliente in cliente:
-        csenha_hash = cliente.password_hash
+
+    if admin:
+        asenha_hash = admin[0].password_hash
+    if func:
+        fsenha_hash = func[0].password_hash
+    if cliente:
+        csenha_hash = cliente[0].password_hash
+    
     if admin and admin_rep.check_password(senha, asenha_hash):
         return 'admin'
     elif func and func_rep.check_password(senha, fsenha_hash):

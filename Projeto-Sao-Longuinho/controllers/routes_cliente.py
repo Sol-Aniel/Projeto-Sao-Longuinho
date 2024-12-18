@@ -17,7 +17,7 @@ def painel():
 
 @clientes.route('/pedidos')
 def pedidos():
-    cliente_id = session.get['id']
+    cliente_id = session.get('id')
     pedidos = objetos_rep.get_objetos_by('client_id', cliente_id)
     return render_template('pedidos.html', pedidos=pedidos)
 
@@ -82,10 +82,4 @@ def perfil():
     else:
         id = session.get('id')
         cliente = clientes_rep.get_cliente(id)
-        nome = cliente.name
-        email = cliente.email
-        telefone = cliente.phone
-        nacionalidade = cliente.nacionality 
-        endereco = cliente.adress
-        password_hash = cliente.password_hash
-        return render_template('perfil.html', nome=nome, email=email, telefone=telefone, nacionalidade=nacionalidade, endereco=endereco, password_hash=password_hash)
+        return render_template('perfil.html', cliente = cliente)

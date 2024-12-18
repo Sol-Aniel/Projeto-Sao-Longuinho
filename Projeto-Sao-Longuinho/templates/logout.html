@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="title">
+        <h1>Confirmar Logout</h1>
+    </div>
+    <br><br><br>
+    <div class="exibir">
+        <h2>Você realmente deseja sair?</h2>
+        <p>Se você sair, precisará fazer login novamente para acessar a sua conta.</p>
+        
+        <div class="funcoes">
+            <form action="/logout" method="POST">
+                <button type="submit" class="alterar">Sim, quero sair</a>
+            </form>
+            <a href="/" class="alterar">Cancelar</a>
+        </div>
+    </div>
+
+</body>
+</html>

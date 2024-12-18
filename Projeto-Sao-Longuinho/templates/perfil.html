@@ -8,17 +8,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div>
-        <h1>Adicionar Equipe</h1>
-        <form method="POST" action="/equipes/add/">
-            <label for="nome">Nome:</label>
-            <input type="name" id="nome" value="{{ equipe.name }}" required>
-            <label for="email">Funcionários:</label>
-            <input type="email" id="email" value="{{ equipe.funcionarios }}" required> 
-            <label for="phone">Objetos:</label>
-            <input type="tel" id="phone" value="{{ equipe.objetos }}" required>
-            <button type="submit">Adicionar Equipe</button>
-        </form>
+    <div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ cliente.name }}</td>    
+                <td>{{ cliente.email }}</td>    
+                <td>{{ cliente.adress }}</td>   
+                <td>{{ cliente.phone }}</td>     
+            </tr>
+        </tbody>
         {% with messages = get_flashed_messages(with_categories=True) %}
             <br>
             {% if messages %}
@@ -30,5 +37,8 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+    <a href="/perfil">Editar Perfil</a>
+    </table>
+    </div>
 </body>
 </html>

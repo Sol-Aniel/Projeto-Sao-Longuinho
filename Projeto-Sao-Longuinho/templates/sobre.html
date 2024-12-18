@@ -1,16 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <title>Sobre Nós - Longuinho Finders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='sobre.css') }}">
 </head>
 <body>
-    <h1>Sobre Nós:</h1>
-    <p>ldfmwekfomnafuiohawefjnajcfj  oidjeofoef  oifnoiewjc niefjnufnskdçpoweghjfm
-        BIFIUWEFNIFNUWEFCNPEHFç!
-    </p>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cadastro">Cadastro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Principal (Título) -->
+    <div class="title">
+        <h1>Sobre a Longuinho Finders</h1>
+        <p>Encontramos o que você perdeu, mesmo que tenha sido jogado ao espaço!</p>
+    </div>
+
+    <!-- Seção "Exibir" com informações sobre a agência -->
+    <div class="exibir">
+        <h2>A Agência Longuinho Finders</h2>
+        <p>A Longuinho Finders é uma agência especializada em encontrar objetos perdidos, oferecendo soluções práticas e eficazes para a recuperação de itens como carteiras, chaves, meias e muito mais. Contamos com uma equipe altamente treinada e uma rede de especialistas que atuam para localizar e devolver seus bens, com precisão e segurança.</p>
+        <p>Somos mais do que uma simples empresa de busca; somos uma equipe dedicada que utiliza a tecnologia de ponta para rastrear objetos de maneira eficiente, mesmo que estejam fora do alcance das mãos. Nossa missão é garantir que você nunca fique sem aquilo que mais precisa!</p>
+    </div>
+
+    <!-- Seção "Exibir" com informações sobre como funciona o serviço -->
+    <div class="exibir">
+        <h2>Como Funciona</h2>
+        <p>Nosso processo é simples e direto:</p>
+        <table>
+            <tr>
+                <td><strong>1. Relate seu objeto perdido</strong></td>
+                <td>Encontre o item perdido e nos envie as informações detalhadas: descrição, última localização e outras observações importantes.</td>
+            </tr>
+            <tr>
+                <td><strong>2. Analisamos e começamos a busca</strong></td>
+                <td>Após o relato, nossa equipe inicia a busca, usando as melhores ferramentas e recursos para rastrear e localizar seu item.</td>
+            </tr>
+            <tr>
+                <td><strong>3. Recuperação e entrega</strong></td>
+                <td>Assim que o objeto for encontrado, nossa equipe entrará em contato para realizar a entrega segura diretamente para você.</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Seção com as funcionalidades da agência -->
+    <div class="exibir">
+        <h2>O que Oferecemos</h2>
+        <div class="funcoes">
+            <a href="#">Busca Rápida</a>
+            <a href="#">Equipe Especializada</a>
+            <a href="#">Tecnologia Avançada</a>
+        </div>
+    </div>
+
+    <!-- Seção de Contato -->
+    <div class="exibir">
+        <h2>Entre em Contato</h2>
+        <p>Se você perdeu algo, entre em contato conosco para iniciar a busca!</p>
+        <a class="alterar" href="#">Fale Conosco</a>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Longuinho Finders - Todos os direitos reservados</p>
+    </footer>
 </body>
 </html>
