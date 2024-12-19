@@ -1,0 +1,39 @@
+/* Reset de margens e paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Altura mínima para ocupar a tela toda */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Fundo suave */
+    color: #333;
+}
+
+.centered-div {
+    background: #ffffff; /* Fundo branco para destacar */
+    padding: 20px 30px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    text-align: center; /* Centraliza texto e elementos */
+    width: 100%;
+    max-width: 400px; /* Limita largura máxima */
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #555;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
