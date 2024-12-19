@@ -26,6 +26,9 @@ def equipe():
 @funcionarios.route('/pendentes')
 def pendentes():
     objetos_pendentes = objetos_rep.get_objetos_by('found', False)
+    categorias = categorias_rep.get_categorias()
+    clientes = clientes_rep.get_clientes()
+    equipes = equipes_rep.get_equipes()
     return render_template('pendentes.html', objetos=objetos_pendentes)
 
 @funcionarios.route('/achados')
