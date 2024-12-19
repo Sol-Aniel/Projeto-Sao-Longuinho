@@ -21,11 +21,14 @@
         {% if e.id == objeto.team_id %}
             {% for c in clientes %}
             {% if c.id == objeto.client_id %}
-                <strong>Equipe: {{ e.name }}</strong> - Cliente: {{ objeto.price }}
+                <strong>Equipe: {{ e.name }}</strong> - Cliente: {{ c.name }}
             {% endif %}
             {% endfor %}
         {% endif %}
         {% endfor %}
+    </li>
+    <li>
+        <strong>{{ objeto.price }}</strong>
     </li>
     {% endfor %}
 </ul>
