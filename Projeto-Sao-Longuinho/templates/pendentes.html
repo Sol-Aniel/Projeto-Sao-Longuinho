@@ -46,8 +46,11 @@
             </tr>
             <tr>
                 <td>
-                    <form actio="{{ url_for('func.modstatus', obj_id=objeto.id}}"
-                    <button type="submit"class="back-button">Aprovar</button>
+                    {% if func.type_id == 1 %}
+                        <form action="{{ url_for('func.modstatus', obj_id=objeto.id}}" method="POST">
+                            <button type="submit"class="back-button">Aprovar</button>
+                        </form>
+                    {% endif %}
                 </td>
             </tr>
         {% endif %}
