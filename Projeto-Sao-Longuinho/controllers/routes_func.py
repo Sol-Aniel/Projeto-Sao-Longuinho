@@ -31,7 +31,10 @@ def pendentes():
 @funcionarios.route('/achados')
 def achados():
     objetos_achados = objetos_rep.get_objetos_by('found', True)
-    return render_template('achados.html', objetos=objetos_achados)
+    categorias = categorias_rep.get_categorias()
+    clientes = clientes_rep.get_clientes()
+    equipes = equipes_rep.get_equipes()
+    return render_template('achados.html', clientes=clientes, equipes=equipes, categorias=categorias, objetos=objetos_achados)
 
 @funcionarios.route('/alterar-status/<int:obj_id>', methods=['POST'])
 def modstatus(obj_id):
