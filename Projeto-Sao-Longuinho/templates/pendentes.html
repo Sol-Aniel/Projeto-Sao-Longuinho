@@ -31,7 +31,19 @@
             </tr>
             <tr>
                 <td>{{ objeto.photo }}</td>    
-             </tr>  
+             </tr>
+            <tr>
+                {% for e in equipes %}
+                {% if e.id == objeto.team_id %}
+                        {% for c in clientes %}
+                        {% if c.id == objeto.client_id %}
+                            <td>Equipe: {{ e.name }}</td>
+                            <td>Cliente: {{ c.name }}</td>
+                        {% endif %}
+                        {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </tr>
         {% endif %}
     {% endfor %}        
     </div>
