@@ -34,16 +34,31 @@ def achados():
 
 @funcionarios.route('/alterar-status/<int:obj_id>', methods=['POST'])
 def modstatus(obj_id):
-    sucesso = objetos_rep.update_found(obj_id, True)
-    if sucesso == True:
-        flash("Ojeto dado como achado.", "success")
-        return redirect(url_for('func.achados'))
+    func_id = session.get('id')
+    func = func_rep.get_funcionario(func_id)
+    tipo = tipos_rep.get_tipo(func.type_id)
+    if tipo.name == 'Líder':
+        sucesso = objetos_rep.update_found(obj_id, True)
+        if sucesso == True:
+            flash("Ojeto dado como achado.", "success")
+            return redirect(url_for('func.achados'))
+        else:
+            flash(sucesso, "danger")
+            return redirect(url_for('func.pendentes'))
     else:
-        flash(sucesso, "danger")
+        flash("Só o líder da equipe pode dar um objeto como encontrado", "danger")
         return redirect(url_for('func.pendentes'))
-
-@funcionarios.route('/perfil/worker', methods=['GET', 'POST'])
+    
+@funcionarios.route('/perfil/worker')
 def perfil():
+    id = session.get('id')
+    func = func_rep.get_funcionario(id)
+    tipo = categorias_rep.get_categoria(func.type_id)
+    equipe = equipes_rep.get_equipe(func.team_id)
+    return render_template('perfil_w.html', func = func, tipo=tipo, equipe=equipe)
+
+@funcionarios.route('/edit/perfil/worker', methods=['GET', 'POST'])
+def edit_perfil():
     if request.method == 'POST':
         name = request.form['nome']
         team_id = request.form['team_id']
@@ -62,21 +77,13 @@ def perfil():
                 return redirect(url_for('func.painel_worker'))
             else:
                 flash(sucesso, "danger")
-                return render_template('perfil_w.html')
+                return render_template('edit_perfil_w.html')
         else:
             flash(mensagem, 'danger')
-            return render_template('perfil_w.html')
+            return render_template('edit_perfil_w.html')
     else:
         id = session.get('id')
         func = func_rep.get_funcionario(id)
-        name = func.name
-        team = equipes_rep.get_equipe(func.team_id)
-        team = team.name
-        type_ = tiposrep.get_tipo(func.type_id)
-        type_ = type_.name
-        email = func.email
-        phone = func.phone
-        salary = func.salary
-        adress = func.adress
-        password_hash = func.password_hash
-        return render_template('perfil_w.html', name=name, team_id=team_id, type_id=type_id, email=email, phone=phone, salary=salary, adress=adress, password_hash=password_hash)
+        tipo = categorias_rep.get_categoria(func.type_id)
+        equipe = equipes_rep.get_equipe(func.team_id)
+        return render_template('edit_perfil_w.html', func=func, tipo=tipo, equipe=equipe)

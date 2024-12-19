@@ -27,3 +27,6 @@ class FuncionariosRepository:
     
     def delete_funcionario(self, id):
         return self.FUNCdao.add_funcionario(id)
+    
+    def update_equipe(self, id, equipe_id):
+        return self.FUNCdao.update_equipe(id, equipe_id)

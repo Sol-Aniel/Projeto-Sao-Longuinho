@@ -18,9 +18,9 @@ class OBJETOSdao:
         return Objetos.query.filter(getattr(Objetos, by) == value).all()
     
     @staticmethod
-    def add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments):
+    def add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments, price):
         try:
-            objeto = Objetos(title = title, photo = photo, client_id = client_id, category_id = category_id, description = description, team_id = team_id, found = found, plural = plural, size = size, weight = weight, lost_local = lost_local, lost_date = lost_date, comments = comments)
+            objeto = Objetos(title = title, photo = photo, client_id = client_id, category_id = category_id, description = description, team_id = team_id, found = found, plural = plural, size = size, weight = weight, lost_local = lost_local, lost_date = lost_date, comments = comments, price = price)
             db.session.add(objeto)
             db.session.commit()
             return True
@@ -40,7 +40,7 @@ class OBJETOSdao:
             return e
 
     @staticmethod
-    def mod_objeto(id, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments):
+    def mod_objeto(id, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments, price):
         try:
             objeto = OBJETOSdao.get_objeto(id)  
             objeto.id = id
@@ -57,6 +57,7 @@ class OBJETOSdao:
             objeto.lost_local = lost_local
             objeto.lost_date = lost_date
             objeto.comments = comments
+            objeto.price = price
             db.session.commit()
             return True
         except Exception as e:
@@ -68,6 +69,17 @@ class OBJETOSdao:
         try:
             objeto = OBJETOSdao.get_objeto(id)
             objeto.found = found  # True para 'achado', False para 'pendente'
+            db.session.commit()
+            return True
+        except Exception as e:
+            db.session.rollback()
+            return e
+        
+    @staticmethod
+    def update_price(id, price):
+        try:
+            objeto = OBJETOSdao.get_objeto(id)
+            objeto.price = price
             db.session.commit()
             return True
         except Exception as e:

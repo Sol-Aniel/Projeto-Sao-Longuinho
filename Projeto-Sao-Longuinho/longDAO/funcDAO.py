@@ -79,3 +79,14 @@ class FUNCdao:
         except Exception as e:
             db.session.rollback()
             return e
+        
+    @staticmethod
+    def update_equipe(id, equipe_id):
+        try:
+            func = FUNCdao.get_funcionario(id)
+            func.team_id = equipe_id
+            db.session.commit()
+            return True
+        except Exception as e:
+            db.session.rollback()
+            return e

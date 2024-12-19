@@ -45,6 +45,10 @@
             
     {% endfor %}
     <a href="/painel">Voltar</a>
+    {% if valor != 0 %}
+            <img srs="{{ url_for('static', filename='images/pix.jpeg') }}">
+            <h2>Valor total a ser pago: {{ valor }}</h2>
+    {% endif %}
     </table>
 </body>
 </html>

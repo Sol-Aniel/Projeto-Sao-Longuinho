@@ -58,10 +58,16 @@ def solicitar():
         lost_date = request.form['lost_date']
         lost_date = datetime.strptime(lost_date, '%Y-%m-%d').date()
         comments = request.form['comentarios']
+        price = None
 
-        objetos_rep.add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments)
-        flash('Objeto adicionado! Aguarde aprovação de busca', 'sucess')
-        return redirect(url_for('cliente.painel'))
+        sucesso = objetos_rep.add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments, price)
+        if sucesso == True:  
+            flash('Objeto adicionado! Aguarde aprovação de busca', 'sucess')
+            return redirect(url_for('cliente.painel'))
+        else: 
+            flash(sucesso, "danger")
+            categorias = categorias_rep.get_categorias()
+            return render_template('solicitar.html', categorias=categorias)
     else:
         categorias = categorias_rep.get_categorias()
         return render_template('solicitar.html', categorias=categorias)
