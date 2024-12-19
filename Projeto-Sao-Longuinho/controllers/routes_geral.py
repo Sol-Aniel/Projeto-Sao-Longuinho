@@ -7,9 +7,34 @@ geral = Blueprint('geral',__name__)
 
 # armazenando dados na sessão
 def sessionuser(user):
-    for user in user:
-        session['id'] = user.id
-        session['name'] = user.name
+    session['id'] = user.id
+    session['name'] = user.name
+
+@geral.before_request
+def save_previous_route():
+    if session:
+        if request.endpoint != 'static':  # Ignorar rotas estáticas
+            session['previous_route'] = request.referrer  # Armazena a URL anterior
+
+@geral.before_request
+def set_data():
+    admin = admin_rep.get_admins()
+    tipos = tipos_rep.get_tipos()
+    cats = categorias_rep.get_categorias()
+    if len(admin) == 0:
+        admin_rep.add_admin('Mr. Longuinho', 'long@gmail.com', 'Qw1@@@@@')
+    if len(tipos) == 0:
+        tipos_rep.add_tipo('Líder')
+        tipos_rep.add_tipo('Agente')
+        tipos_rep.add_tipo('Pesquisador')
+    if len(cats) == 0:
+        categorias_rep.add_categoria("Eletrônicos")
+        categorias_rep.add_categoria("Roupas")
+        categorias_rep.add_categoria("Ferramentas")
+        categorias_rep.add_categoria("Imóveis")
+        categorias_rep.add_categoria("Armas")
+        categorias_rep.add_categoria("Acessórios")
+        categorias_rep.add_categoria("Outros")
 
 @geral.route('/')
 def index():
@@ -17,6 +42,7 @@ def index():
 
 @geral.route('/image/<int:obj_id>')
 def get_image(obj_id):
+    obj = int(obj_id)
     if session:  
         obj = objetos_rep.get_objeto(obj_id)
         if not obj or not obj.photo:  
@@ -54,19 +80,25 @@ def login():
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
                 user = admin_rep.get_admin_by('email', email)
-                sessionuser(user)
+                sessionuser(user[0])
                 return redirect(url_for('admin.dashboard'))
             elif acess == 'cliente':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
                 user = clientes_rep.get_clientes_by('email', email)
-                sessionuser(user)
+                sessionuser(user[0])
+                validade, mensagem = sobreEncontrados()
+                validade_, mensagem_ = sobreAprovados()
+                if validade_:
+                    flash(mensagem_, "sucess")
+                if validade:
+                    flash(mensagem, "sucess")
                 return redirect(url_for('cliente.painel'))
             elif acess == 'func':
                 flash('Login efetuado', 'success')
                 session['acess'] = acess
                 user = func_rep.get_funcionarios_by('email', email)
-                sessionuser(user)
+                sessionuser(user[0])
                 return redirect(url_for('func.painel_worker'))
             else:
                 flash('Usuário não encontrado ou senha incorreta', 'danger')
@@ -101,9 +133,13 @@ def cadastro():
 @geral.route('/objeto/<int:obj_id>')
 def objeto(obj_id):
     if session:
-        acess = session.get['acess']
+        acess = session.get('acess')
         objeto = objetos_rep.get_objeto(obj_id)
-        return render_template('objeto.html', acess=acess, objeto=objeto)
+        cliente = clientes_rep.get_cliente(objeto.client_id)
+        equipe = equipes_rep.get_equipe(objeto.team_id)
+        categoria = categorias_rep.get_categoria(objeto.category_id)
+        rota = session.get('previous_route')
+        return render_template('objeto.html', rota=rota, acess=acess, cliente=cliente, categoria=categoria, equipe=equipe, objeto=objeto)
     else:
         return abort(403)
 

@@ -17,13 +17,19 @@ def painel():
 
 @clientes.route('/pedidos')
 def pedidos():
-    cliente_id = session.get['id']
+    cliente_id = session.get('id')
     pedidos = objetos_rep.get_objetos_by('client_id', cliente_id)
-    return render_template('pedidos.html', pedidos=pedidos)
+    precos = []
+    for p in pedidos:
+        if p.price:
+            precos.appen(p.price)
+    valor = sum(precos)
+    return render_template('pedidos.html', pedidos=pedidos, valor=valor)
 
-@clientes.route('/pedidos/excluir/<int:obj_id>', methods=['GET', 'POST'])
+@clientes.route('/pedidos/excluir/<int:obj_id>', methods=['POST'])
 def excluir_pedidos(obj_id):
-    if request.method == 'POST':
+    obj = objetos_rep.get_objeto(obj_id)
+    if not obj.team_id:
         sucesso = objetos_rep.delete_objeto(obj_id)
         if sucesso == True:
             flash("Objeto excluído com sucesso", "success")
@@ -31,20 +37,21 @@ def excluir_pedidos(obj_id):
         else:
             flash(sucesso, "danger")
             return redirect(url_for('cliente.pedidos'))
-    else:
-        return render_template('excluir.html')
+    else: 
+        flash("Uma equipe já foi designada, impossível excluir objeto", "danger")
+        return redirect(url_for('geral.objeto', obj_id=obj_id))
 
 @clientes.route('/solicitar', methods=['GET', 'POST'])
 def solicitar():
     if request.method == 'POST':
         title = request.form['titulo']
         photo = request.files['foto'].read()
-        client_id = session.get['id']
+        client_id = session.get('id')
         category_id = request.form['category_id']
         description = request.form['descricao']
-        team_id = request.form['team_id']
+        team_id = None
         found = False
-        plural = bool(request.form['plural'])
+        plural = bool(request.form.get('plural', None))
         size = float(request.form['tamanho'])
         weight = float(request.form['peso'])
         lost_local = request.form['lost_local']
@@ -54,11 +61,19 @@ def solicitar():
 
         objetos_rep.add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments)
         flash('Objeto adicionado! Aguarde aprovação de busca', 'sucess')
+        return redirect(url_for('cliente.painel'))
     else:
-        return render_template('solicitar.html')
-
-@clientes.route('/perfil', methods=['GET', 'POST'])
+        categorias = categorias_rep.get_categorias()
+        return render_template('solicitar.html', categorias=categorias)
+    
+@clientes.route('/perfil')
 def perfil():
+    id = session.get('id')
+    cliente = clientes_rep.get_cliente(id)
+    return render_template('perfil.html', cliente = cliente)
+
+@clientes.route('/edit/perfil', methods=['GET', 'POST'])
+def edit_perfil():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
@@ -75,17 +90,11 @@ def perfil():
                 return redirect(url_for('cliente.painel'))
             else:
                 flash(sucesso, "danger")
-                return render_template('perfil.html')
+                return render_template('editar_perfil.html')
         else:
             flash(mensagem, 'danger')
-            return render_template('perfil.html')
+            return render_template('editar_perfil.html')
     else:
         id = session.get('id')
         cliente = clientes_rep.get_cliente(id)
-        nome = cliente.name
-        email = cliente.email
-        telefone = cliente.phone
-        nacionalidade = cliente.nacionality 
-        endereco = cliente.adress
-        password_hash = cliente.password_hash
-        return render_template('perfil.html', nome=nome, email=email, telefone=telefone, nacionalidade=nacionalidade, endereco=endereco, password_hash=password_hash)
+        return render_template('editar_perfil.html', cliente = cliente)

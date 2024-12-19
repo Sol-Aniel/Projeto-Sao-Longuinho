@@ -74,3 +74,163 @@ nav a:hover {
         margin: 5px 0;
     }
 }
+
+/* Estilo geral */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Imagem no canto esquerdo preenchendo toda a vertical */
+.title img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    z-index: -1; /* Coloca a imagem atrás do conteúdo */
+}
+
+/* Centralizar div exibir */
+.exibir {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.exibir h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.exibir table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.exibir td {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.funcoes {
+    display: flex;
+    gap: 20px;
+}
+
+.funcoes a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.funcoes a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.funcoes a:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+.alterar a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.alterar a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.alterar a:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* Container principal para a tabela */
+.container {
+    width: 100%;
+    max-width: 10000px;
+    margin: 50px auto;
+    padding: 15px;
+    background-color: #38412a;
+    border: 1px solid #ffccbc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+  
+/* Estilo da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+/* Estilo das células da tabela */
+th, td {
+    padding: 15px;
+    text-align: left;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo dos cabeçalhos */
+th {
+    font-weight: bold;
+    background-color: #bcffda;
+    color: #395d37;
+    text-align: center;
+}
+
+/* Estilo das linhas alternadas */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Efeito ao passar o mouse sobre as linhas */
+tr:hover {
+    background-color: #e9f7e9;
+}

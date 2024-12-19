@@ -1,27 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cadastrar</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Cadastro - Longuinho Finders</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-    <h1>Cadastre-se</h1>
-    <form action="/cadastro" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="">
-        <label for="email">Email:</label>
-        <input type="email" name="email">
-        <label for="telefone">Telefone:</label>
-        <input type="tel" name="telefone" id="">
-        <label for="nacionalidade">Nacionalidade:</label>
-        <input type="text" name="nacionalidade">
-        <label for="endereco">Endereço</label>
-        <input type="text" name="endereco">
-        <label for="senha">Senha</label>
-        <input type="password" name="senha">
-        <button type="submit">Enviar</button>
-    </form>
+    <!-- Seção Hero -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Cadastre-se na Longuinho Finders</h1>
+            <p class="hero-description">Seja bem-vindo à agência especializada em encontrar objetos perdidos. Complete seu cadastro e faça parte da nossa rede de especialistas!</p>
+        </div>
+    </div>
+
+    <!-- Formulário de Cadastro -->
+    <div class="form-container">
+        <h2>Cadastro de Usuário</h2>
+        <form action="/cadastro" method="post">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
+            </div>
+            <div class="form-group">
+                <label for="nacionalidade">Nacionalidade:</label>
+                <input type="text" name="nacionalidade" id="nacionalidade" placeholder="Digite sua nacionalidade" required>
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço:</label>
+                <input type="text" name="endereco" id="endereco" placeholder="Digite seu endereço" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Escolha uma senha" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Cadastrar</button>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            <br>
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                    {{ message }}
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <p>&copy; 2024 Longuinho Finders. Todos os direitos reservados.</p>
+    </div>
 </body>
 </html>

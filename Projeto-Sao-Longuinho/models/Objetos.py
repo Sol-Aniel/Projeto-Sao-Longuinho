@@ -10,7 +10,7 @@ class Objetos(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False, index=True)
     category_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False, index=True)
     description = db.Column(db.Text, nullable=False)
-    team_id = db.Column(db.String(50),db.ForeignKey('equipes.id'), nullable=False, default='')
+    team_id = db.Column(db.String(50),db.ForeignKey('equipes.id'))
     found = db.Column(db.Boolean, nullable=False, default=False, index=True)
     plural = db.Column(db.Boolean, nullable=False, default=False, index=True)
     size = db.Column(db.Float, nullable=False, default=(0))
@@ -18,6 +18,7 @@ class Objetos(db.Model):
     lost_local = db.Column(db.String(100), default='Não informado')
     lost_date = db.Column(db.Date, default='Não informado')
     comments = db.Column(db.Text, default='')
+    price = db.Column(db.Numeric(scale=2), nullable=True)
 
     clientes = db.relationship('Clientes', back_populates='objetos')
     categorias = db.relationship('Categorias', back_populates='objetos')

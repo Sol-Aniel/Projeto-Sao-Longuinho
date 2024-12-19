@@ -1,0 +1,221 @@
+/* Estilos globais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color:  #7ed956;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo do logotipo */
+.logo {
+    width: 400px;
+    height: auto;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    text-align: center;
+}
+
+.hero-content {
+    background: rgba(29, 61, 34, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn-group .btn {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #000000;
+    padding: 20px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Formulário */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: rgba(29, 61, 34, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Grupos de Formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Foco nos campos de input */
+.form-group input:focus {
+    outline: none;
+    border: 2px solid #7ed956; /* Cor de destaque no foco */
+    background-color: #e0e0e0;
+}
+
+/* Botão */
+.btn {
+    background-color: #7ed956;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Para garantir que o botão ocupe toda a largura do formulário */
+}
+
+.btn:hover {
+    background-color: #65b636;
+    transform: scale(1.05);
+}
+
+.btn:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* Estilos globais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #7ed956;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo do logotipo */
+.logo {
+    width: 400px;
+    height: auto;
+}
+
+/* Formulário de login */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: rgba(29, 61, 34, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Grupos de Formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Foco nos campos de input */
+.form-group input:focus {
+    outline: none;
+    border: 2px solid #7ed956; /* Cor de destaque no foco */
+    background-color: #e0e0e0;
+}
+
+/* Botão */
+.btn {
+    background-color: #7ed956;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Para garantir que o botão ocupe toda a largura do formulário */
+}
+
+.btn:hover {
+    background-color: #65b636;
+    transform: scale(1.05);
+}
+
+.btn:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* Link de cadastro */
+p a {
+    color: #7ed956;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
