@@ -138,8 +138,9 @@ def objeto(obj_id):
         cliente = clientes_rep.get_cliente(objeto.client_id)
         equipe = equipes_rep.get_equipe(objeto.team_id)
         categoria = categorias_rep.get_categoria(objeto.category_id)
+        equipes = equipes_rep.get_equipes()
         rota = session.get('previous_route')
-        return render_template('objeto.html', rota=rota, acess=acess, cliente=cliente, categoria=categoria, equipe=equipe, objeto=objeto)
+        return render_template('objeto.html', equipes=equipes, rota=rota, acess=acess, cliente=cliente, categoria=categoria, equipe=equipe, objeto=objeto)
     else:
         return abort(403)
 

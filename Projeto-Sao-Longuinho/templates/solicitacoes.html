@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='geral.css') }}">
 </head>
 <style>
- 
 
+</style>
 <body>
  <div class="centered-div">
     <div class="title">
         <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" class="logo">
         <h1>Longuinho Finders</h1>
         </div>
-         <p>Lista de pedidos!</p>
+         <p>Lista de solicitações!</p>
         <div class="funcoes">
      <table border="1">
     <thead>
@@ -35,16 +35,27 @@
     <tbody>
         {% for o in objetos %}
         <tr>
-            <td>{objeto.title}</td>
-            <td>{objeto.description}</td>
-            <td>{objeto.found}</td>
-            <td>{objeto.team_id}</td>
-            <td>{objeto.price}</td>
-            <td>{objeto.lost_local}</td>
-            <td>{objeto.lost_date}</td>
-            <td>{objeto.plural}</td>
-            <td>{objeto.categoriy_id}</td>
+            <td>{{ o.title }}</td>
+            <td>{{ o.description}}</td>
+            <td>{{o.found}}</td>
+            {% for e in equipes %}
+            {% if o.team_id == e.id %}
+            <td>{{ e.name }}</td>
+            {% endif %}
+            {% endfor %}
+            <td>{{o.price}}</td>
+            <td>{{o.lost_local}}</td>
+            <td>{{o.lost_date}}</td>
+            <td>{{o.plural}}</td>
+            {% for c in categorias %}
+            {% if o.category_id == c.id %}
+            <td>{{ c.name }}</td>
+            {% endif %}
+            {% endfor %}
         </tr>
+        <div class="btn-group">
+            <a href="{{ url_for('geral.objeto', obj_id=o.id) }}" class="btn btn-primary">Ver mais</a>
+        </div>
         {% endfor %}
     </tbody>
 </table>

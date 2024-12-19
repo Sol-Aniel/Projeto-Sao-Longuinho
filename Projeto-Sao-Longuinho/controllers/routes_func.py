@@ -20,7 +20,8 @@ def equipe():
     funcionario = func_rep.get_funcionario(funcionario_id)
     equipe_id = funcionario.team_id
     equipe = equipes_rep.get_equipe(equipe_id)
-    return render_template('equipe.html', equipe=equipe)
+    objetos = objetos_rep.get_objetos_by('team_id', equipe_id)
+    return render_template('equipe.html', equipe=equipe, objetos=objetos)
 
 @funcionarios.route('/pendentes')
 def pendentes():

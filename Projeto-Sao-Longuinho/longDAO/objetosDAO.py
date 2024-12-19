@@ -76,10 +76,11 @@ class OBJETOSdao:
             return e
         
     @staticmethod
-    def update_price(id, price):
+    def approve(id, price, team_id):
         try:
             objeto = OBJETOSdao.get_objeto(id)
             objeto.price = price
+            objeto.team_id = team_id
             db.session.commit()
             return True
         except Exception as e:

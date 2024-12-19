@@ -7,11 +7,11 @@ class EQUIPESdao:
 
     @staticmethod
     def get_equipe(id):
-        Equipes.query.get(id)
+        return Equipes.query.get(id)
 
     @staticmethod
     def get_equipes():
-        Equipes.query.all()
+        return Equipes.query.all()
 
     @staticmethod
     def get_equipes_by(by, value):

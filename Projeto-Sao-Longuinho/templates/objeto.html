@@ -35,8 +35,23 @@
         {% if acess == "func" %}
             <a href="{{ url_for('func.modstatus', obj_id=objeto.id) }}" class="back-button">Marcar como encontradp</a>
         {% endif %}
-        {% if acess == "admin" %}
-            <a href="{{ url_for('admin.modequipe', obj_id=objeto.id) }}" class="back-button">Designar equipe</a>
+        {% if acess == "admin" and objeto.team_id == None %}
+        <form action="{{ url_for('admin.aprovar', obj_id=objeto.id) }}" method="post">
+            <!-- Título -->
+            <label for="preco">Preço: R$</label>
+            <input type="number" step="100" name="preco" id="preco" required>
+            <br><br>
+
+            <label for="equipe_id">Equipe:</label>
+            <select id="equipe_id" name="equipe_id" required>
+                {% for e in equipes %}
+                <option value="{{ e.id }}">{{ e.name }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            
+            <button type="submit"class="back-button">Aprovar</button>
+        </form>
         {% endif %}
         <a href="{{ rota }}" class="back-button">Voltar</a>
     </div>

@@ -7,11 +7,11 @@ class FUNCdao:
 
     @staticmethod
     def get_funcionario(id):
-        Funcionarios.query.get(id)
+        return Funcionarios.query.get(id)
 
     @staticmethod
     def get_funcionarios():
-        Funcionarios.query.all()
+        return Funcionarios.query.all()
 
     @staticmethod
     def get_funcionarios_by(by, value):

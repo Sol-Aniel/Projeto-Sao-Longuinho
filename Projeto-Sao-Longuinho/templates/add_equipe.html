@@ -10,13 +10,19 @@
 <body>
     <div class="centered-div">
         <h1>Adicionar Equipe</h1>
-        <form method="POST" action="/equipes/add/">
+        <form method="POST" action="/equipe/add/" enctype="multipart/form-data">
             <label for="nome">Nome:</label>
-            <input type="name" id="nome" value="{{ equipe.name }}" required>
-            <label for="email">Funcionários:</label>
-            <input type="email" id="email" value="{{ equipe.funcionarios }}" required> 
-            <label for="phone">Objetos:</label>
-            <input type="tel" id="phone" value="{{ equipe.objetos }}" required>
+            <input type="text" name="nome" id="nome" required>
+            <label for="funcs">Funcionários:</label>
+            <select id="funcs" name="funcionarios[]" multiple>
+                {% for f in funcionarios %}
+                    {% for t in tipos %}
+                        {% if f.type_id == t.id %}
+                            <option value="{{ f.id }}">{{ f.name }} - {{ t.name }}</option>
+                        {% endif %}        
+                    {% endfor %}
+                {% endfor %}
+            </select>
             <button type="submit">Adicionar Equipe</button>
         </form>
         {% with messages = get_flashed_messages(with_categories=True) %}

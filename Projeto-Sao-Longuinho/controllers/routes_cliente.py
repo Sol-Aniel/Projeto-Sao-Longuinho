@@ -22,7 +22,7 @@ def pedidos():
     precos = []
     for p in pedidos:
         if p.price:
-            precos.appen(p.price)
+            precos.append(p.price)
     valor = sum(precos)
     return render_template('pedidos.html', pedidos=pedidos, valor=valor)
 

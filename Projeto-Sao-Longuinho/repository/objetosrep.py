@@ -28,5 +28,5 @@ class ObjetosRepository:
     def update_found(self, id, found):
         return self.OBJETOSdao.update_status(id, found)
     
-    def update_price(self, id, price):
-        return self.OBJETOSdao.update_price(id, price)
+    def approve(self, id, price, team_id):
+        return self.OBJETOSdao.update_price(id, price, team_id)

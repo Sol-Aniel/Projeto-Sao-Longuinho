@@ -24,7 +24,7 @@
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Funcionários</th>   
+            <th>Funcionários</th>
             <th>Objetos</th>
            
         </tr>
@@ -32,8 +32,11 @@
             {% for e in equipes %}
             <tr>
                 <td>{{ e.name }}</td>
-                <td>{{ e.funcionarios }}</td>
-                <td>{{ e.objetos }}</td>
+                {% for f in funcionarios %}
+                    {% if e.id == f.team_id %}
+                        <td>{{ f.name }}</td>
+                    {% endif %}
+                {% endfor %}
             </tr>
             {% endfor %}
     </thead>
