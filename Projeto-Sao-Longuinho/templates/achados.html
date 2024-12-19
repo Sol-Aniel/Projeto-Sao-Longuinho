@@ -16,6 +16,17 @@
     <li>
         <strong>{{ objeto.title }}</strong> - {{ objeto.description }}
     </li>
+    <li>
+        {% for e in equipes %}
+        {% if e.id == objeto.team_id %}
+            {% for c in clientes %}
+            {% if c.id == objeto.client_id %}
+                <strong>Equipe: {{ e.name }}</strong> - Cliente: {{ objeto.price }}
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </li>
     {% endfor %}
 </ul>
 {% with messages = get_flashed_messages(with_categories=True) %}
