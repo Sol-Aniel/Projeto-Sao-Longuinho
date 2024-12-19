@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Objeto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='objeto.css') }}">
+</head>
+<body>
+    <div class="object-container">
+        <h1 class="object-title">{{ objeto.title }}</h1>
+        <img src="{{ url_for('geral.get_image', obj_id=objeto.id) }}" alt="Longuinho Finders" class="object-photo">
+
+        <div class="object-info">
+            <p><strong>Cliente:</strong> {{ cliente.name }}</p>
+            <p><strong>Categoria:</strong> {{ categoria.name }}</p>
+            <p><strong>Descrição:</strong> {{ objeto.description }}</p>
+            <p><strong>Equipe Designada:</strong> {{ equipe.name }}</p>
+            <p><strong>Encontrado:</strong> {{ 'Sim' if objeto.found else 'Não' }}</p>
+            <p><strong>Plural:</strong> {{ 'Sim' if objeto.plural else 'Não' }}</p>
+            <p><strong>Tamanho:</strong> {{ objeto.size }} cm</p>
+            <p><strong>Peso:</strong> {{ objeto.weight }} kg</p>
+            <p><strong>Local Perdido:</strong> {{ objeto.lost_local }}</p>
+            <p><strong>Data em que foi Perdido:</strong> {{ objeto.lost_date.strftime('%d/%m/%Y') }}</p>
+            <p><strong>Comentários:</strong> {{ objeto.comments }}</p>
+            <p><strong>Valor a ser pago:</strong> R${{ objeto.price }}</p>
+        </div>
+
+        {% if not objeto.team_id and acess == "cliente" %}
+            <form id="postForm" action="{{ url_for('cliente.excluir_pedidos', obj_id=objeto.id) }}" method="POST" style="display:none;">
+                <input type="hidden" name="chave" value="valor">
+            </form>
+            <a href="#" onclick="document.getElementById('postForm').submit();" class="back-button">Excluir</a>
+        {% endif %}
+        {% if acess == "func" %}
+            <a href="{{ url_for('func.modstatus', obj_id=objeto.id) }}" class="back-button">Marcar como encontradp</a>
+        {% endif %}
+        {% if acess == "admin" %}
+            <a href="{{ url_for('admin.modequipe', obj_id=objeto.id) }}" class="back-button">Designar equipe</a>
+        {% endif %}
+        <a href="{{ rota }}" class="back-button">Voltar</a>
+    </div>
+</body>
+</html>

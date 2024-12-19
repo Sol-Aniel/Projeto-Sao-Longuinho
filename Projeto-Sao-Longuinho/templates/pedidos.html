@@ -33,6 +33,9 @@
                 <td><img src="{{ url_for('geral.get_image', obj_id=p.id) }}" alt="Longuinho Finders"/></td>    
             </tr>
             <tr>
+                <td>R${{ p.price }}</td>  
+            </tr>
+            <tr>
                 <td>
                     <div class="btn-group">
                         <a href="{{ url_for('geral.objeto', obj_id=p.id) }}" class="btn btn-primary">Ver mais</a>

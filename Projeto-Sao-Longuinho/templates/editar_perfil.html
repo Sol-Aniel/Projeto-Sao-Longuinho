@@ -9,21 +9,21 @@
 <body>
     <div class="exibir">
         <h3>Deseja editar suas informações de cadastro?</h3>
-        {% for f in cliente %}
-        <form method="POST" action="/perfil">
+        <form method="POST" action="/edit/perfil">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome">
+            <input type="text" name="nome" id="nome" value="{{ cliente.name }}">
+            <label for="nacionalidade">Nacionalidade:</label>
+            <input type="text" name="nacionalidade" id="nacionalidade" value="{{ cliente.nacionality }}">
             <label for="email">Email:</label>
-            <input type="email" id="email">
-            <label for="adress">Endereço:</label>
-            <input type="text" id="adress">
-            <label for="phone">Telefone:</label>
-            <input type="tel" id="phone">
-            <label for="senha_hash">Telefone:</label>
-            <input type="password" id="senha_hash">
+            <input type="email" name="email" id="email" value="{{ cliente.email }}">
+            <label for="endereco">Endereço:</label>
+            <input type="text" name="endereco" id="endereco" value="{{ cliente.adress }}">
+            <label for="telefone">Telefone:</label>
+            <input type="tel" name="telefone" id="telefone" value="{{ cliente.phone }}">
+            <label for="password_hash">Telefone:</label>
+            <input type="password" name="senha" id="password_hash">
             <button type="submit">Salvar</button>
         </form>
-        {% endif %}
         {% with messages = get_flashed_messages(with_categories=True) %}
             <br>
             {% if messages %}

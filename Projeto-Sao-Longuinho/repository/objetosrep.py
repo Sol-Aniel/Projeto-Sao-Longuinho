@@ -23,7 +23,7 @@ class ObjetosRepository:
         return self.OBJETOSdao.mod_objeto(id, title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments)
     
     def delete_objeto(self, id):
-        return self.OBJETOSdao.add_objeto(id)
+        return self.OBJETOSdao.delete_objeto(id)
 
     def update_found(self, id, found):
         return self.OBJETOSdao.update_status(id, found)

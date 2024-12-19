@@ -32,9 +32,9 @@ def achados():
     objetos_achados = objetos_rep.get_objetos_by('found', True)
     return render_template('achados.html', objetos=objetos_achados)
 
-@funcionarios.route('/alterar-status/<int:id>', methods=['POST'])
-def modstatus(id):
-    sucesso = objetos_rep.update_found(id, True)
+@funcionarios.route('/alterar-status/<int:obj_id>', methods=['POST'])
+def modstatus(obj_id):
+    sucesso = objetos_rep.update_found(obj_id, True)
     if sucesso == True:
         flash("Ojeto dado como achado.", "success")
         return redirect(url_for('func.achados'))

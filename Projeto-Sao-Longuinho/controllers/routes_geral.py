@@ -11,6 +11,12 @@ def sessionuser(user):
     session['name'] = user.name
 
 @geral.before_request
+def save_previous_route():
+    if session:
+        if request.endpoint != 'static':  # Ignorar rotas estáticas
+            session['previous_route'] = request.referrer  # Armazena a URL anterior
+
+@geral.before_request
 def set_data():
     admin = admin_rep.get_admins()
     tipos = tipos_rep.get_tipos()
@@ -81,6 +87,12 @@ def login():
                 session['acess'] = acess
                 user = clientes_rep.get_clientes_by('email', email)
                 sessionuser(user[0])
+                validade, mensagem = sobreEncontrados()
+                validade_, mensagem_ = sobreAprovados()
+                if validade_:
+                    flash(mensagem_, "sucess")
+                if validade:
+                    flash(mensagem, "sucess")
                 return redirect(url_for('cliente.painel'))
             elif acess == 'func':
                 flash('Login efetuado', 'success')
@@ -121,9 +133,13 @@ def cadastro():
 @geral.route('/objeto/<int:obj_id>')
 def objeto(obj_id):
     if session:
-        acess = session.get['acess']
+        acess = session.get('acess')
         objeto = objetos_rep.get_objeto(obj_id)
-        return render_template('objeto.html', acess=acess, objeto=objeto)
+        cliente = clientes_rep.get_cliente(objeto.client_id)
+        equipe = equipes_rep.get_equipe(objeto.team_id)
+        categoria = categorias_rep.get_categoria(objeto.category_id)
+        rota = session.get('previous_route')
+        return render_template('objeto.html', rota=rota, acess=acess, cliente=cliente, categoria=categoria, equipe=equipe, objeto=objeto)
     else:
         return abort(403)
 

@@ -54,3 +54,25 @@ def validarSenha(senha):
         return False, "A senha deve conter pelo menos um caractere especial."
 
     return True, "Senha válida."
+
+def sobreEncontrados(client_id):
+    objetos = objetos_rep.get_objetos_by('client_id', client_id)
+    encontrado = False
+    for objeto in objetos:
+        if objeto.found:
+            encontrado = True
+    if encontrado:
+        return True, "Você tem objetos encontrados! Espere eles chegarem na sua casa pelos Correios!"
+    else:
+        return False, "Nenhum objeto encontrado até o momento"
+    
+def sobreAprovados(client_id):
+    objetos = objetos_rep.get_objetos_by('client_id', client_id)
+    preco = False
+    for objeto in objetos:
+        if objeto.team_id:
+            preco = True
+    if preco:
+        return True, "Você tem objetos aprovados! Realize o pagamento para começar a busca!"
+    else:
+        return False, "Nenhum objeto aprovado até o momento"

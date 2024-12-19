@@ -41,3 +41,10 @@ def add_funcionarios():
 @administradores.route('/funcionarios/edit/<int:id>', methods=['GET', 'POST'])
 def edit_funcionarios():
     return render_template('edit_funcionarios.html')
+
+@administradores.route('/add/admin', methods=['GET', 'POST'])
+def add_admin():
+    if request.method == 'POST':
+        return redirect(url_for('admin.dashboard'))
+    else:
+        return render_template('add_admin.html')
