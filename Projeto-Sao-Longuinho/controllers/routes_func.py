@@ -36,7 +36,7 @@ def pendentes():
     categorias = categorias_rep.get_categorias()
     clientes = clientes_rep.get_clientes()
     equipes = equipes_rep.get_equipes()
-    return render_template('pendentes.html', objetos=objetos)
+    return render_template('pendentes.html', objetos=objetos, func=func)
 
 @funcionarios.route('/achados')
 def achados():
