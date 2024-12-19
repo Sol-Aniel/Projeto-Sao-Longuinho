@@ -73,6 +73,7 @@
         </tr>
     </thead>
     <tbody>
+        {% for o in objetos %}
         <tr>
             <td>{objeto.title}</td>
             <td>{objeto.description}</td>
@@ -84,6 +85,7 @@
             <td>{objeto.plural}</td>
             <td>{objeto.categoriy_id}</td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 
