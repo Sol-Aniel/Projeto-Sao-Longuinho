@@ -77,7 +77,7 @@ def edit_equipes(equipe_id):
         funcs_equipe = func_rep.get_funcionarios_by('team_id', equipe_id)
         funcs = func_rep.get_funcionarios_by('team_id', None)
         tipos = tipos_rep.get_tipos()
-        return render_template('edit_equipe.html', equipe=equipe, funcionarios=funcionarios, tipos=tipos)
+        return render_template('edit_equipe.html', equipe=equipe, funcionarios=funcs, funcs_equipe=funcs_equipe, tipos=tipos)
 
 @administradores.route('/solicitacoes', methods=['GET', 'POST'])
 def solicitacoes():
