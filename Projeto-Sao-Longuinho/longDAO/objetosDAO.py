@@ -7,11 +7,11 @@ class OBJETOSdao:
 
     @staticmethod
     def get_objeto(id):
-        Objetos.query.get(id)
+        return Objetos.query.get(id)
 
     @staticmethod
     def get_objetos():
-        Objetos.query.all()
+        return Objetos.query.all()
 
     @staticmethod
     def get_objetos_by(by, value):

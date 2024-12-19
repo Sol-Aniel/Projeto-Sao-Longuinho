@@ -39,12 +39,12 @@ def solicitar():
     if request.method == 'POST':
         title = request.form['titulo']
         photo = request.files['foto'].read()
-        client_id = session.get['id']
+        client_id = session.get('id')
         category_id = request.form['category_id']
         description = request.form['descricao']
-        team_id = request.form['team_id']
+        team_id = None
         found = False
-        plural = bool(request.form['plural'])
+        plural = bool(request.form.get('plural', None))
         size = float(request.form['tamanho'])
         weight = float(request.form['peso'])
         lost_local = request.form['lost_local']
@@ -54,8 +54,10 @@ def solicitar():
 
         objetos_rep.add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments)
         flash('Objeto adicionado! Aguarde aprovação de busca', 'sucess')
+        return redirect(url_for('cliente.painel'))
     else:
-        return render_template('solicitar.html')
+        categorias = categorias_rep.get_categorias()
+        return render_template('solicitar.html', categorias=categorias)
 
 @clientes.route('/perfil', methods=['GET', 'POST'])
 def perfil():

@@ -24,16 +24,23 @@
     {% for p in pedidos%}
     <table>
             <tr>
-                <td>{{ objeto.title }}</td>   
+                <td>{{ p.title }}</td>   
             </tr> 
             <tr>
-                <td>{{ objeto.description }}</td>  
-           </tr>
-           <tr>
-                <td><img src="{{ url_for('get_image', obj_id=objeto.id) }}" alt="Longuinho Finders"/></td>    
+                <td>{{ p.description }}</td>  
+            </tr>
+            <tr>
+                <td><img src="{{ url_for('geral.get_image', obj_id=p.id) }}" alt="Longuinho Finders"/></td>    
+            </tr>
+            <tr>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ url_for('geral.objeto', obj_id=p.id) }}" class="btn btn-primary">Ver mais</a>
+                    </div>
+                </td>
             </tr>  
             
-            {% endfor %}
+    {% endfor %}
     <a href="/painel">Voltar</a>
     </table>
 </body>

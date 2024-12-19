@@ -10,12 +10,33 @@ def sessionuser(user):
     session['id'] = user.id
     session['name'] = user.name
 
+@geral.before_request
+def set_data():
+    admin = admin_rep.get_admins()
+    tipos = tipos_rep.get_tipos()
+    cats = categorias_rep.get_categorias()
+    if len(admin) == 0:
+        admin_rep.add_admin('Mr. Longuinho', 'long@gmail.com', 'Qw1@@@@@')
+    if len(tipos) == 0:
+        tipos_rep.add_tipo('Líder')
+        tipos_rep.add_tipo('Agente')
+        tipos_rep.add_tipo('Pesquisador')
+    if len(cats) == 0:
+        categorias_rep.add_categoria("Eletrônicos")
+        categorias_rep.add_categoria("Roupas")
+        categorias_rep.add_categoria("Ferramentas")
+        categorias_rep.add_categoria("Imóveis")
+        categorias_rep.add_categoria("Armas")
+        categorias_rep.add_categoria("Acessórios")
+        categorias_rep.add_categoria("Outros")
+
 @geral.route('/')
 def index():
     return render_template('index.html')
 
 @geral.route('/image/<int:obj_id>')
 def get_image(obj_id):
+    obj = int(obj_id)
     if session:  
         obj = objetos_rep.get_objeto(obj_id)
         if not obj or not obj.photo:  
