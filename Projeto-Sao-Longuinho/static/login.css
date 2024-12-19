@@ -1,0 +1,167 @@
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9; /* Fundo suave */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estrutura principal */
+.form-container, .exibir, .hero-section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Seção hero */
+.hero-section {
+    text-align: center;
+    background: linear-gradient(135deg, #6c63ff, #9c88ff);
+    color: #fff;
+    padding: 40px 20px;
+    border-radius: 0;
+}
+
+.hero-title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.hero-description {
+    font-size: 16px;
+}
+
+/* Estilos do formulário */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #555;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button.btn {
+    width: 100%;
+    padding: 10px;
+    background: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button.btn:hover {
+    background: #5750d5;
+}
+
+/* Alertas */
+.alert {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.closebtn {
+    float: right;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Rodapé */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    background: #6c63ff;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Links */
+a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Botões */
+.alterar {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #6c63ff;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s;
+}
+
+.alterar:hover {
+    background: #5750d5;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 22px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    button.btn, .alterar {
+        font-size: 14px;
+    }
+
+    .form-container, .exibir {
+        padding: 15px;
+    }
+}
