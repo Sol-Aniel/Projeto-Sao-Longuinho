@@ -26,18 +26,32 @@ def equipe():
 @funcionarios.route('/pendentes')
 def pendentes():
     objetos_pendentes = objetos_rep.get_objetos_by('found', False)
+    objetos = objetos_pendentes
+    func_id = session.get('id')
+    func = func_rep.get_funcionario(func_id)
+    equipe = equipes_rep.get_equipe(func.team_id)
+    for o in objetos_pendentes:
+        if o.team_id != equipe.id:
+            objetos.remove(o)
     categorias = categorias_rep.get_categorias()
     clientes = clientes_rep.get_clientes()
     equipes = equipes_rep.get_equipes()
-    return render_template('pendentes.html', objetos=objetos_pendentes)
+    return render_template('pendentes.html', objetos=objetos)
 
 @funcionarios.route('/achados')
 def achados():
     objetos_achados = objetos_rep.get_objetos_by('found', True)
+    objetos = objetos_pendentes
+    func_id = session.get('id')
+    func = func_rep.get_funcionario(func_id)
+    equipe = equipes_rep.get_equipe(func.team_id)
+    for o in objetos_achados:
+        if o.team_id != equipe.id:
+            objetos.remove(o)
     categorias = categorias_rep.get_categorias()
     clientes = clientes_rep.get_clientes()
     equipes = equipes_rep.get_equipes()
-    return render_template('achados.html', clientes=clientes, equipes=equipes, categorias=categorias, objetos=objetos_achados)
+    return render_template('achados.html', clientes=clientes, equipes=equipes, categorias=categorias, objetos=objetos)
 
 @funcionarios.route('/alterar-status/<int:obj_id>', methods=['POST'])
 def modstatus(obj_id):
