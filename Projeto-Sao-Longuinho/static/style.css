@@ -9,8 +9,8 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #7ed956;
+    
 }
 
 /* Menu */
@@ -28,6 +28,13 @@ body {
 .logo img {
     width: 50px;
     height: auto;
+    align-content: center;
+    align-self: center;
+    display: flex; /* Usando Flexbox */
+    justify-content: center; /* Centraliza as imagens horizontalmente */
+    align-items: center;  /* Usando grid para melhor controle do layout */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Barra de navegação */
@@ -82,7 +89,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    background-color: #7ed956;
     color: #fff;
     display: flex;
     align-items: center;
@@ -91,19 +98,10 @@ body {
 }
 
 /* Imagem no canto esquerdo preenchendo toda a vertical */
-.title img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    z-index: -1; /* Coloca a imagem atrás do conteúdo */
-}
 
 /* Centralizar div exibir */
 .exibir {
-    background: rgba(37, 231, 47, 0.2);
+    background: rgba(0, 0, 0, 0.4);
     padding: 30px;
     border-radius: 10px;
     text-align: center;
@@ -177,7 +175,7 @@ p {
 }
 
 .funcoes a:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(11, 187, 4, 0.205);
     transform: scale(1.1);
     box-shadow: 0 6px 15px rgba(27, 94, 1, 0.3);
 }
@@ -200,7 +198,7 @@ p {
 }
 
 .alterar a:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(11, 121, 1, 0.164);
     transform: scale(1.05);
 }
 

@@ -24,7 +24,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
     text-align: center; /* Centraliza texto e elementos */
     width: 100%;
-    max-width: 400; /* Limita largura máxima */
+    max-width: 10; /* Limita largura máxima */
     align-items: center;
     
 }
@@ -99,6 +99,7 @@ li {
 .logo{
 width: 500px;
 height: auto;
+align-self: auto;
 }
 
 .back-button:hover {
@@ -130,8 +131,6 @@ img {
 /* Imagens */
  img {
     width: 100%; /* Garante que as imagens ocupem toda a largura da célula */
-    height: 200px; /* Altura fixa para todas as imagens */
-    object-fit: cover; /* Mantém a proporção da imagem sem distorção, cortando o que exceder */
     border-radius: 10px; /* Bordas arredondadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para as imagens */
     transition: transform 0.3s ease; /* Efeito de transição suave no hover */
@@ -163,8 +162,8 @@ table {
 /* Estilo para as células da tabela */
 th, td {
     padding: 12px 15px; /* Espaçamento interno para as células */
-    text-align: left; /* Alinha o conteúdo à esquerda */
-    font-size: 1rem; /* Tamanho de fonte legível */
+    text-align: center; /* Alinha o conteúdo à esquerda */
+    font-size: 2rem; /* Tamanho de fonte legível */
     color: #333; /* Cor do texto */
     border-bottom: 1px solid #ddd; /* Linha sutil para separar as linhas */
     transition: background-color 0.3s ease, color 0.3s ease; /* Efeito suave de transição */
@@ -198,3 +197,4 @@ td.highlight, th.highlight {
     color: #000; /* Cor do texto de destaque */
     font-weight: bold; /* Torna o texto em negrito */
 }
+

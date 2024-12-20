@@ -30,7 +30,7 @@
         
         <!-- Foto -->
         <label for="foto">Escolha uma imagem:</label>
-        <input type="file" name="foto" id="foto" accept="image/jpeg, image/png, image/gif" placeholder="Opcional">
+        <input type="file" name="foto" id="foto" accept="image/jpeg, image/png, image/gif" placeholder="Opcional"><br><br>
         
         <!-- Categoria -->
         <label for="category_id">Categoria:</label>
@@ -44,9 +44,10 @@
         
         <!-- Descrição -->
         <label for="descricao">Descrição:</label>
+        <div class="description">
         <textarea name="descricao" id="descricao" rows="4" required placeholder="Obrigatório"></textarea>
         <br><br>
-        
+        </div>
         <!-- Plural -->
         <label for="plural">É um conjunto de itens?</label>
         <input type="checkbox" name="plural" id="plural">
@@ -73,10 +74,12 @@
         <br><br>
         
         <!-- Comentários -->
+
         <label for="comentarios">Comentários adicionais:</label>
+        <div>
         <textarea name="comentarios" id="comentarios" rows="4" placeholder="Opcional"></textarea>
         <br><br>
-        
+        </div>
         <button type="submit">Cadastrar</button>
     </form>
     </div>
