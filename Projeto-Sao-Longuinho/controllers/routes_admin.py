@@ -26,57 +26,66 @@ def equipes():
 def add_equipes():
     if request.method == 'POST':
         name = request.form["nome"]
-        funcs = request.form.getlist('funcionarios[]')
+        funcs_id = request.form.getlist('funcionarios[]')
+        equipe_nova = []
+        for f in funcs_id:
+            func = func_rep.get_funcionario(f)
+            equipe_nova.append(func)
         sucesso = equipes_rep.add_equipe(name)
         if sucesso == True:
             flash("Equipe Adicionada com sucesso!", "sucess")
-            for func in funcs:
+            for func in equipe_nova:
                 equipe = equipes_rep.get_equipes_by('name', name)
                 equipe_id = equipe[0].id
                 func_rep.update_equipe(func.id, equipe_id)
-            return redirect(url_for('admin.equipes'))
+            name_ = session.get('name')
+            resp = make_response(redirect(url_for('admin.equipes')))
+            c_name = "ADD {}".format(name_)
+            c_value = "EQUIPE {} ADIONADA".format(name)
+            resp.set_cookie(c_name, c_value)
+            session['cookies'].append(f"{c_name}: {c_value}")
+            return resp
         else:
             flash(sucesso, "danger")
             return redirect(url_for('admin.add_equipes'))
     else:
-        funcs = func_rep.get_funcionarios_by('team_id', None)
-        lideres = []
-        funcionarios = funcs
-        for func in funcs:
-            if func.type_id == 1:
-                lideres.append(func)
-                funcionarios.remove(func)
-        tipos = tipos_rep.get_tipos
-        return render_template('add_equipe.html', lideres=lideres, tipos=tipos, funcionarios=funcionarios)
+        funcionarios = func_rep.get_funcionarios_by('team_id', None)
+        tipos = tipos_rep.get_tipos()
+        return render_template('add_equipe.html', tipos=tipos, funcionarios=funcionarios)
 
 @administradores.route('/equipes/edit/<int:equipe_id>', methods=['GET', 'POST'])
 def edit_equipes(equipe_id):
+    equipe = equipes_rep.get_equipe(equipe_id)
+    funcs_equipe = func_rep.get_funcionarios_by('team_id', equipe_id)
+    funcs = func_rep.get_funcionarios_by('team_id', None)
+    tipos = tipos_rep.get_tipos()
     if request.method == 'POST':
         nome = request.form['nome']
-        funcs_equipe = request.form.getlist('funcionarios[]')
-        funcs = func_rep.get_funcionarios
-        
+        funcs_id = request.form.getlist('funcionarios_id[]')
+        equipe_nova = []
+        for f in funcs_id:
+            func = func_rep.get_funcionario(f)
+            equipe_nova.append(func)
+        funcs = func_rep.get_funcionarios()
         sucesso = equipes_rep.mod_equipe(equipe_id, nome)
         if sucesso == True:
             flash("Equipe Atualizada com sucesso", "sucess")
             for func in funcs:
-                if func.team_id == equipe_id and func not in funcs_equipe:
+                if func.team_id == equipe_id and func not in equipe_nova:
                     func_rep.update_equipe(func.id, None)
-            for func in funcs_equipe:
-                equipe = equipes_rep.get_equipes_by('name', nome)
-                equipe_id = equipe[0].id
+            for func in equipe_nova:
                 func_rep.update_equipe(func.id, equipe_id)
+            name_ = session.get('name')
+            resp = make_response(redirect(url_for('admin.dashboard')))
+            c_name = "EDIT {}".format(name_)
+            c_value = "EQUIPE {} EDITADA".format(nome)
+            resp.set_cookie(c_name, c_value)
+            session['cookies'].append(f"{c_name}: {c_value}")
+            return resp
         else:
-            equipe = equipes_rep.get_equipe(equipe_id)
-            funcs_equipe = func_rep.get_funcionarios_by('team_id', equipe_id)
-            funcs = func_rep.get_funcionarios_by('team_id', None)
-            tipos = tipos_rep.get_tipos()
-            return render_template('edit_equipe.html', equipe=equipe, funcionarios=funcionarios, tipos=tipos)
+            flash(sucesso, "danger")
+            return render_template('edit_equipe.html', equipe=equipe, funcionarios=funcs, funcs_equipe=funcs_equipe, tipos=tipos)
     else:
-        equipe = equipes_rep.get_equipe(equipe_id)
-        funcs_equipe = func_rep.get_funcionarios_by('team_id', equipe_id)
-        funcs = func_rep.get_funcionarios_by('team_id', None)
-        tipos = tipos_rep.get_tipos()
         return render_template('edit_equipe.html', equipe=equipe, funcionarios=funcs, funcs_equipe=funcs_equipe, tipos=tipos)
 
 @administradores.route('/solicitacoes', methods=['GET', 'POST'])
@@ -93,7 +102,14 @@ def aprovar(obj_id):
     sucesso = objetos_rep.approve(obj_id, price, team_id)
     if sucesso == True:
         flash("Objeto Aprovado!", 'sucess')
-        return redirect(url_for('admin.solicitacoes'))
+        name_ = session.get('name')
+        resp = make_response(redirect(url_for('admin.solicitacoes')))
+        c_name = "APPROVE {}".format(name_)
+        obj = objetos_rep.get_objeto(obj_id)
+        c_value = "OBJETO {} APROVADO".format(obj.name)
+        resp.set_cookie(c_name, c_value)
+        session['cookies'].append(f"{c_name}: {c_value}")
+        return resp
     else:
         flash(sucesso, 'sucess')
         return redirect(url_for('admin.solicitacoes'))
@@ -123,7 +139,13 @@ def add_funcionarios():
             sucesso = func_rep.add_funcionario(nome, equipe_id, tipo_id, email, telefone, salario , endereco, senha)
             if sucesso == True:
                 flash('Funcionario cadastrado', 'success')
-                return redirect(url_for('admin.dashboard'))
+                name_ = session.get('name')
+                resp = make_response(redirect(url_for('admin.dashboard')))
+                c_name = "ADD {}".format(name_)
+                c_value = "FUNCIONARIO {} ADICIONADO".format(nome)
+                resp.set_cookie(c_name, c_value)
+                session['cookies'].append(f"{c_name}: {c_value}")
+                return resp
             else:
                 flash(sucesso, "danger")
                 return render_template('add_funcionario.html', equipes=equipes, tipos=tipos)
@@ -138,6 +160,8 @@ def edit_funcionarios(func_id):
     func = func_rep.get_funcionario(func_id)
     equipes = equipes_rep.get_equipes()
     tipos = tipos_rep.get_tipos()
+    equipe = equipes_rep.get_equipe(func.team_id)
+    tipo = tipos_rep.get_tipo(func.type_id)
     if request.method == 'POST':
         nome = request.form['nome']
         equipe_id = request.form['equipe_id']
@@ -152,15 +176,21 @@ def edit_funcionarios(func_id):
             sucesso = func_rep.mod_funcionario(func_id, nome, equipe_id, tipo_id, email, telefone, salario , endereco, senha)
             if sucesso == True:
                 flash('Funcionario atualizado', 'success')
+                name_ = session.get('name')
+                resp = make_response(redirect(url_for('admin.dashboard')))
+                c_name = "EDIT {}".format(name_)
+                c_value = "FUNCIONARIO {} EDITADO".format(nome)
+                resp.set_cookie(c_name, c_value)
+                session['cookies'].append(f"{c_name}: {c_value}")
                 return redirect(url_for('admin.dashboard'))
             else:
                 flash(sucesso, "danger")
-                return render_template('edit_funcionarios.html', func=func, equipes=equipes, tipos=tipos)
+                return render_template('edit_funcionarios.html', funcionario=func, equipes=equipes, tipos=tipos, equipe=equipe, tipo=tipo)
         else:
             flash(mensagem, 'danger')
-            return render_template('edit_funcionarios.html', func=func, equipes=equipes, tipos=tipos)
+            return render_template('edit_funcionarios.html', funcionario=func, equipes=equipes, tipos=tipos, equipe=equipe, tipo=tipo)
     else:
-        return render_template('edit_funcionarios.html',func=func, equipes=equipes, tipos=tipos)
+        return render_template('edit_funcionarios.html',funcionario=func, equipes=equipes, tipos=tipos, equipe=equipe, tipo=tipo)
 
 @administradores.route('/add/admin', methods=['GET', 'POST'])
 def add_admin():
@@ -173,7 +203,13 @@ def add_admin():
             sucesso = admin_rep.add_admin(nome, email, senha)
             if sucesso == True:
                 flash('Administrador cadastrado', 'success')
-                return redirect(url_for('admin.dashboard'))
+                name_ = session.get('name')
+                resp = make_response(redirect(url_for('admin.dashboard')))
+                c_name = "ADD {}".format(name_)
+                c_value = "ADMINISTRADOR {} ADICIONADO".format(nome)
+                resp.set_cookie(c_name, c_value)
+                session['cookies'].append(f"{c_name}: {c_value}")
+                return resp
             else:
                 flash(sucesso, "danger")
                 return render_template('add_admin.html')

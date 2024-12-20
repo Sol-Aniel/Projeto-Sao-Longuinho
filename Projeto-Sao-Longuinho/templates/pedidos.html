@@ -45,12 +45,12 @@
             </tr>  
             
     {% endfor %}
+    </table>
     <a href="/painel">Voltar</a>
     {% if valor != 0 %}
-            <img srs="{{ url_for('static', filename='images/pix.jpeg') }}">
+            <img src="{{ url_for('static', filename='images/pix.jpeg') }}"  alt="Logo" class="logo">
             <h2>Valor total a ser pago: {{ valor }}</h2>
     {% endif %}
-    </table>
     </div>
 </body>
 </html>

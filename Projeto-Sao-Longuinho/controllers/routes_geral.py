@@ -9,6 +9,7 @@ geral = Blueprint('geral',__name__)
 def sessionuser(user):
     session['id'] = user.id
     session['name'] = user.name
+    session['cookies'] = []
 
 @geral.before_request
 def save_previous_route():
@@ -18,23 +19,7 @@ def save_previous_route():
 
 @geral.before_request
 def set_data():
-    admin = admin_rep.get_admins()
-    tipos = tipos_rep.get_tipos()
-    cats = categorias_rep.get_categorias()
-    if len(admin) == 0:
-        admin_rep.add_admin('Mr. Longuinho', 'long@gmail.com', 'Qw1@@@@@')
-    if len(tipos) == 0:
-        tipos_rep.add_tipo('Líder')
-        tipos_rep.add_tipo('Agente')
-        tipos_rep.add_tipo('Pesquisador')
-    if len(cats) == 0:
-        categorias_rep.add_categoria("Eletrônicos")
-        categorias_rep.add_categoria("Roupas")
-        categorias_rep.add_categoria("Ferramentas")
-        categorias_rep.add_categoria("Imóveis")
-        categorias_rep.add_categoria("Armas")
-        categorias_rep.add_categoria("Acessórios")
-        categorias_rep.add_categoria("Outros")
+    setData()
 
 @geral.route('/')
 def index():
@@ -73,36 +58,46 @@ def sobre():
 @geral.route('/login', methods=['GET', 'POST'])
 def login():
         if request.method == 'POST':
-            email = request.form['email']
-            senha = request.form['senha']
-            acess = validarUser(email, senha)
-            if acess == 'admin':
-                flash('Login efetuado', 'success')
-                session['acess'] = acess
-                user = admin_rep.get_admin_by('email', email)
-                sessionuser(user[0])
-                return redirect(url_for('admin.dashboard'))
-            elif acess == 'cliente':
-                flash('Login efetuado', 'success')
-                session['acess'] = acess
-                user = clientes_rep.get_clientes_by('email', email)
-                sessionuser(user[0])
-                validade, mensagem = sobreEncontrados()
-                validade_, mensagem_ = sobreAprovados()
-                if validade_:
-                    flash(mensagem_, "sucess")
-                if validade:
-                    flash(mensagem, "sucess")
-                return redirect(url_for('cliente.painel'))
-            elif acess == 'func':
-                flash('Login efetuado', 'success')
-                session['acess'] = acess
-                user = func_rep.get_funcionarios_by('email', email)
-                sessionuser(user[0])
-                return redirect(url_for('func.painel_worker'))
+            if not session:
+                email = request.form['email']
+                senha = request.form['senha']
+                acess = validarUser(email, senha)
+                if acess == 'admin':
+                    flash('Login efetuado', 'success')
+                    session['acess'] = acess
+                    user = admin_rep.get_admin_by('email', email)
+                    sessionuser(user[0])
+                    name = session.get('name')
+                    resp = make_response(redirect(url_for('admin.dashboard')))
+                    c_name = "LOGGING {}".format(name)
+                    c_value = "USUÁRIO {} ENTROU".format(name)
+                    resp.set_cookie(c_name, c_value)
+                    session['cookies'].append(f"{c_name}: {c_value}")
+                    return resp
+                elif acess == 'cliente':
+                    flash('Login efetuado', 'success')
+                    session['acess'] = acess
+                    user = clientes_rep.get_clientes_by('email', email)
+                    sessionuser(user[0])
+                    validade, mensagem = sobreEncontrados(session.get('id'))
+                    validade_, mensagem_ = sobreAprovados(session.get('id'))
+                    if validade_:
+                        flash(mensagem_, "sucess")
+                    if validade:
+                        flash(mensagem, "sucess")
+                    return redirect(url_for('cliente.painel'))
+                elif acess == 'func':
+                    flash('Login efetuado', 'success')
+                    session['acess'] = acess
+                    user = func_rep.get_funcionarios_by('email', email)
+                    sessionuser(user[0])
+                    return redirect(url_for('func.painel_worker'))
+                else:
+                    flash('Usuário não encontrado ou senha incorreta', 'danger')
+                    return render_template("login.html")
             else:
-                flash('Usuário não encontrado ou senha incorreta', 'danger')
-                return render_template("login.html")
+                flash("Você já está logado!", "danger")
+                return redirect(url_for('geraç.index'))
         else:
             return render_template('login.html')
 

@@ -33,7 +33,12 @@
             <a href="#" onclick="document.getElementById('postForm').submit();" class="back-button">Excluir</a>
         {% endif %}
         {% if acess == "func" %}
-            <a href="{{ url_for('func.modstatus', obj_id=objeto.id) }}" class="back-button">Marcar como encontradp</a>
+            {% if funcionario.type_id == 1 %}
+                <form id="postForm" action="{{ url_for('func.modstatus', obj_id=objeto.id) }}" method="POST" style="display:none;">
+                    <input type="hidden" name="chave" value="valor">
+                </form>
+                <a href="#" onclick="document.getElementById('postForm').submit();" class="back-button">Marcar como encontrado</a>
+            {% endif %}
         {% endif %}
         {% if acess == "admin" and objeto.team_id == None %}
         <form action="{{ url_for('admin.aprovar', obj_id=objeto.id) }}" method="post">

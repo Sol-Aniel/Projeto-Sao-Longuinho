@@ -37,3 +37,66 @@ p {
     line-height: 1.5;
 }
 
+.title {
+    font-size: 24px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: #333333; /* Cor do texto */
+    text-align: center; /* Alinhamento do texto */
+    margin-top: 20px; /* Espaço acima do título */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+.equipes-container {
+    padding: 20px;
+}
+
+.equipe {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.equipe h2 {
+    color: #007bff;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.funcionarios, .objetos, .acoes {
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.logo{
+width: 500px;
+height: auto;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

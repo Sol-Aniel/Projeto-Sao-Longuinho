@@ -16,51 +16,51 @@
         <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" class="logo">
         <h1>Longuinho Finders</h1>
         </div>
-         <p>Lista de solicitações!</p>
-        <div class="funcoes">
-     <table border="1">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Found</th>
-            <th>Team ID</th>
-            <th>Price</th>
-            <th>Lost Local</th>
-            <th>Lost Date</th>
-            <th>Plural</th>
-            <th>Category ID</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for o in objetos %}
-        <tr>
-            <td>{{ o.title }}</td>
-            <td>{{ o.description}}</td>
-            <td>{{o.found}}</td>
-            {% for e in equipes %}
-            {% if o.team_id == e.id %}
-            <td>{{ e.name }}</td>
-            {% endif %}
+        <p>Lista de solicitações!</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Found</th>
+                <th>Team</th>
+                <th>Price</th>
+                <th>Lost Local</th>
+                <th>Lost Date</th>
+                <th>Plural</th>
+                <th>Category</th>
+                <th>Aprovar:</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in objetos %}
+            <tr>
+                <td>{{ o.title }}</td>
+                <td>{{ o.description}}</td>
+                <td>{% if o.found %}Sim{% else %}Não{% endif %}</td>
+                {% for e in equipes %}
+                {% if o.team_id == e.id %}
+                <td>{{ e.name }}</td>
+                {% endif %}
+                {% endfor %}
+                <td>{{o.price}}</td>
+                <td>{{o.lost_local}}</td>
+                <td>{{o.lost_date}}</td>
+                <td>{% if o.plural %}Sim{% else %}Não{% endif %}</td>
+                {% for c in categorias %}
+                {% if o.category_id == c.id %}
+                <td>{{ c.name }}</td>
+                {% endif %}
+                {% endfor %}
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ url_for('geral.objeto', obj_id=o.id) }}" class="btn btn-primary">Ver mais</a>
+                    </div>
+                </td>
+            </tr>
             {% endfor %}
-            <td>{{o.price}}</td>
-            <td>{{o.lost_local}}</td>
-            <td>{{o.lost_date}}</td>
-            <td>{{o.plural}}</td>
-            {% for c in categorias %}
-            {% if o.category_id == c.id %}
-            <td>{{ c.name }}</td>
-            {% endif %}
-            {% endfor %}
-        </tr>
-        <div class="btn-group">
-            <a href="{{ url_for('geral.objeto', obj_id=o.id) }}" class="btn btn-primary">Ver mais</a>
-        </div>
-        {% endfor %}
-    </tbody>
-</table>
-
-        </div>
+        </tbody>
+    </table>
         {% with messages = get_flashed_messages(with_categories=True) %}
             <br>
             {% if messages %}

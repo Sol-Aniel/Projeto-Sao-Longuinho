@@ -21,7 +21,9 @@ def equipe():
     equipe_id = funcionario.team_id
     equipe = equipes_rep.get_equipe(equipe_id)
     objetos = objetos_rep.get_objetos_by('team_id', equipe_id)
-    return render_template('equipe.html', equipe=equipe, objetos=objetos)
+    funcionarios = func_rep.get_funcionarios_by('team_id', equipe_id)
+    tipos = tipos_rep.get_tipos()
+    return render_template('equipe.html', funcionario=funcionario, equipe=equipe, objetos=objetos, funcionarios=funcionarios, tipos=tipos)
 
 @funcionarios.route('/pendentes')
 def pendentes():
@@ -36,12 +38,12 @@ def pendentes():
     categorias = categorias_rep.get_categorias()
     clientes = clientes_rep.get_clientes()
     equipes = equipes_rep.get_equipes()
-    return render_template('pendentes.html', objetos=objetos, func=func)
+    return render_template('pendentes.html', objetos=objetos, func=func, categorias=categorias, clientes=clientes, equipes=equipes)
 
 @funcionarios.route('/achados')
 def achados():
     objetos_achados = objetos_rep.get_objetos_by('found', True)
-    objetos = objetos_pendentes
+    objetos = objetos_achados
     func_id = session.get('id')
     func = func_rep.get_funcionario(func_id)
     equipe = equipes_rep.get_equipe(func.team_id)
@@ -80,31 +82,30 @@ def perfil():
 
 @funcionarios.route('/edit/perfil/worker', methods=['GET', 'POST'])
 def edit_perfil():
+    func_id = session.get('id')
+    func = func_rep.get_funcionario(func_id)
+    tipo = categorias_rep.get_categoria(func.type_id)
+    equipe = equipes_rep.get_equipe(func.team_id)
     if request.method == 'POST':
         name = request.form['nome']
-        team_id = request.form['team_id']
-        type_id = request.form['type_id']
+        team = equipes_rep.get_equipe(func.team_id)
+        type_ = tipos_rep.get_tipo(func.type_id)
         email = request.form['email']
         phone = request.form['telefone']
-        salary = request.form['salario']
+        salary = func.salary
         adress = request.form['endereco']
         senha = request.form['senha']
-        id = session.get('id')
         validade, mensagem = validarSenha(senha)
         if validade == True:
-            sucesso = func_rep.mod_funcionario(id, name, team_id, type_id, email, phone, salary, adress, senha)
+            sucesso = func_rep.mod_funcionario(func_id, name, team.id, type_.id, email, phone, salary, adress, senha)
             if sucesso == True:
                 flash('Seu perfil foi atualizado!', 'sucess')
                 return redirect(url_for('func.painel_worker'))
             else:
                 flash(sucesso, "danger")
-                return render_template('edit_perfil_w.html')
+                return render_template('edit_perfil_w.html', func=func, tipo=tipo, equipe=equipe)
         else:
             flash(mensagem, 'danger')
-            return render_template('edit_perfil_w.html')
+            return render_template('edit_perfil_w.html', func=func, tipo=tipo, equipe=equipe)
     else:
-        id = session.get('id')
-        func = func_rep.get_funcionario(id)
-        tipo = categorias_rep.get_categoria(func.type_id)
-        equipe = equipes_rep.get_equipe(func.team_id)
         return render_template('edit_perfil_w.html', func=func, tipo=tipo, equipe=equipe)

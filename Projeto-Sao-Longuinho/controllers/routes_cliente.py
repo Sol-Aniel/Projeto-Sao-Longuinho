@@ -80,6 +80,8 @@ def perfil():
 
 @clientes.route('/edit/perfil', methods=['GET', 'POST'])
 def edit_perfil():
+    client_id = session.get('id')
+    cliente = clientes_rep.get_cliente(client_id)
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
@@ -96,11 +98,9 @@ def edit_perfil():
                 return redirect(url_for('cliente.painel'))
             else:
                 flash(sucesso, "danger")
-                return render_template('editar_perfil.html')
+                return render_template('editar_perfil.html', cliente = cliente)
         else:
             flash(mensagem, 'danger')
-            return render_template('editar_perfil.html')
+            return render_template('editar_perfil.html', cliente = cliente)
     else:
-        id = session.get('id')
-        cliente = clientes_rep.get_cliente(id)
         return render_template('editar_perfil.html', cliente = cliente)

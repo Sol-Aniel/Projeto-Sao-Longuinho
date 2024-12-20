@@ -10,7 +10,7 @@ class Objetos(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False, index=True)
     category_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False, index=True)
     description = db.Column(db.Text, nullable=False)
-    team_id = db.Column(db.String(50),db.ForeignKey('equipes.id'))
+    team_id = db.Column(db.Integer,db.ForeignKey('equipes.id'))
     found = db.Column(db.Boolean, nullable=False, default=False, index=True)
     plural = db.Column(db.Boolean, nullable=False, default=False, index=True)
     size = db.Column(db.Float, nullable=False, default=(0))

@@ -14,7 +14,7 @@ class EquipesRepository:
         return self.EQUIPESdao.get_equipes()
     
     def get_equipes_by(self, by, value):
-        return self.EQUIPESdao.get_equipe(by, value)
+        return self.EQUIPESdao.get_equipes_by(by, value)
 
     def add_equipe(self, name):
         return self.EQUIPESdao.add_equipe(name)

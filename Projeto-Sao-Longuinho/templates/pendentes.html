@@ -22,21 +22,21 @@
         {% endif %}
     {% endwith %}
     {% for o in objetos %}
-        {% if objeto.found=False%}
+        {% if o.found==False%}
             <tr>
-                <td>{{ objeto.title }}</td>   
+                <td>{{ o.title }}</td>   
             </tr> 
             <tr>
-                <td>{{ objeto.description }}</td>  
+                <td>{{ o.description }}</td>  
             </tr>
             <tr>
-                <td>{{ objeto.photo }}</td>    
-             </tr>
+                <td><img src="{{ url_for('geral.get_image', obj_id=o.id) }}" alt="Longuinho Finders" class="object-photo"></td>    
+            </tr>
             <tr>
                 {% for e in equipes %}
-                {% if e.id == objeto.team_id %}
+                {% if e.id == o.team_id %}
                         {% for c in clientes %}
-                        {% if c.id == objeto.client_id %}
+                        {% if c.id == o.client_id %}
                             <td>Equipe: {{ e.name }}</td>
                             <td>Cliente: {{ c.name }}</td>
                         {% endif %}
@@ -47,7 +47,7 @@
             <tr>
                 <td>
                     {% if func.type_id == 1 %}
-                        <form action="{{ url_for('func.modstatus', obj_id=objeto.id}}" method="POST">
+                        <form action="{{ url_for('func.modstatus', obj_id=o.id) }}" method="POST">
                             <button type="submit"class="back-button">Aprovar</button>
                         </form>
                     {% endif %}

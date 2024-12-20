@@ -13,6 +13,7 @@
     <h1>Objetos Achados</h1> <!--ideia: fazer meio q um histórico dos objetos achados pela equipe-->
 <ul>
     {% for objeto in objetos %}
+    {% if objeto.found == True %}
     <li>
         <strong>{{ objeto.title }}</strong> - {{ objeto.description }}
     </li>
@@ -28,8 +29,12 @@
         {% endfor %}
     </li>
     <li>
-        <strong>{{ objeto.price }}</strong>
+        <strong>R$ {{ objeto.price }}</strong>
     </li>
+    <li>
+        <td><img src="{{ url_for('geral.get_image', obj_id=objeto.id) }}" alt="Longuinho Finders" class="object-photo"></td>    
+    </li>
+    {% endif %}
     {% endfor %}
 </ul>
 {% with messages = get_flashed_messages(with_categories=True) %}
@@ -40,7 +45,6 @@
                 {{ message }}
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             </div>
-    
         {% endfor %}
     {% endif %}
 {% endwith %}

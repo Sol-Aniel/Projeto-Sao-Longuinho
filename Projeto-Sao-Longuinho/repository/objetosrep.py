@@ -26,7 +26,7 @@ class ObjetosRepository:
         return self.OBJETOSdao.delete_objeto(id)
 
     def update_found(self, id, found):
-        return self.OBJETOSdao.update_status(id, found)
+        return self.OBJETOSdao.update_found(id, found)
     
     def approve(self, id, price, team_id):
-        return self.OBJETOSdao.update_price(id, price, team_id)
+        return self.OBJETOSdao.approve(id, price, team_id)

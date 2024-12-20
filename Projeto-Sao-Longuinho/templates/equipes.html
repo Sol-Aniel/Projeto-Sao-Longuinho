@@ -21,29 +21,61 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Funcionários</th>
-            <th>Objetos</th>
-           
-        </tr>
-        <tbody>
+        <div class="equipes-container">
             {% for e in equipes %}
-            <tr>
-                <td>{{ e.name }}</td>
-                {% for f in funcionarios %}
-                    {% if e.id == f.team_id %}
-                        <td>{{ f.name }}</td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
+                <div class="equipe">
+                    <h2>{{ e.name }}</h2>
+        
+                    <!-- Funcionários da equipe -->
+                    <div class="funcionarios">
+                        <h3>Funcionários:</h3>
+                        <ul>
+                            {% for f in funcionarios %}
+                                {% if e.id == f.team_id %}
+                                    {% for t in tipos %}
+                                        {% if f.type_id == t.id %}
+                                            <li>{{ f.name }} - {{ t.name }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+        
+                    <!-- Objetos da equipe -->
+                    <div class="objetos">
+                        <h3>Objetos:</h3>
+                        <ul>
+                            {% for o in objetos %}
+                                {% if o.team_id == e.id %}
+                                    <li>{{ o.title }} - {% if o.found %}Achado{% else %}Pendente{% endif %}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+        
+                    <!-- Ações para marcar objetos como encontrados -->
+                    <div class="acoes">
+                        {% for o in objetos %}
+                            {% if o.team_id == e.id %}
+                                <form id="postForm" action="{{ url_for('func.modstatus', obj_id=o.id) }}" method="POST" style="display:none;">
+                                    <input type="hidden" name="chave" value="valor">
+                                </form>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="btn-group">
+                        <a href="{{ url_for('admin.edit_equipes', equipe_id=e.id) }}" class="btn btn-primary">Editar Equipe</a>
+                    </div>
+                </div> <!-- Fecha a div.equipe -->
             {% endfor %}
-    </thead>
-      <div class="alterar">
-        <a href="/equipe/add/">Adicionar Equipe</a>  <!--links para rotas de alteração-->
-        <a href="/equipe/edit/">Editar Equipe</a>
-      </div>
+        </div> <!-- Fecha a div.equipes-container -->        
+
+
+        <div class="alterar">
+            <a href="/equipe/add/">Adicionar Equipe</a> 
+        </div>
     </div>
 </body>
 </html>

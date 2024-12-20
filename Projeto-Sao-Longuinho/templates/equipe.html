@@ -17,10 +17,32 @@
             <td>{{equipe.name}}</td>
         </tr>
         <tr>
-            <td>{{equipe.funcionarios}}
+            {% for f in funcionarios %}
+                {% for t in tipos %}
+                    {% if f.type_id == t.id %}
+                        <td>
+                            {{ f.name }} - {{ t.name }}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
         </tr>
         <tr>
-            <td>{{equipe.objetos}}
+            {% for o in objetos %}
+                <td>{{ o.title }} - {{ 'Achado' if o.found else 'Pendente' }}</td>
+        </tr>
+        <tr>
+            {% if funcionario.type_id == 1 %}
+            {% if o.found == False %}
+                <td>
+                    <form id="postForm" action="{{ url_for('func.modstatus', obj_id=o.id) }}" method="POST" style="display:none;">
+                        <input type="hidden" name="chave" value="valor">
+                    </form>
+                    <a href="#" onclick="document.getElementById('postForm').submit();" class="back-button">Marcar como encontrado</a>
+                </td>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
         </tr>
     </table>
     </div>

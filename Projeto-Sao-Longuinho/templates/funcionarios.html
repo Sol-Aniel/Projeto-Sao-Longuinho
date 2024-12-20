@@ -21,20 +21,38 @@
                 <th>Endereço</th>
                 <th>Telefone</th>
                 <th>Salário</th>
-                <th>Time</th>
+                <th>Equipe</th>
                 <th>Cargo</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
             {% for f in funcionarios %} <!-- Loop para listar os funcionários -->
             <tr>
-                <td>{{ f.nome }}</td>     <!-- nome do funcionario-->
+                <td>{{ f.name }}</td>     <!-- nome do funcionario-->
                 <td>{{ f.email }}</td>    <!-- email do funcionario-->
                 <td>{{ f.adress }}</td>   <!-- endereço do funcionario-->
                 <td>{{ f.phone }}</td>    <!-- telefone do funcionario-->
-                <td>{{ f.salary }}</td>   <!-- salário do funcionario-->
-                <td>{{ f.team_id }}</td>  <!-- equipe do funcionario-->
-                <td>{{ f.type_id }}</td>  <!-- cargo do funcionário-->
+                <td>{{ f.salary }}</td> 
+                <td>
+                    {% for e in equipes %}
+                        {% if e.id == f.team_id %}
+                            {{ e.name }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+    
+                <!-- Encontrar o tipo correspondente -->
+                <td>
+                    {% for t in tipos %}
+                        {% if t.id == f.type_id %}
+                            {{ t.name }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ url_for('admin.edit_funcionarios', func_id=f.id) }}" class="back-button">Editar</a>
+                </td>
             </tr>
             {% endfor %} <!--  encerramento do loop -->
         </tbody>
@@ -52,8 +70,7 @@
     {% endwith %}
 
     <div class="alterar">
-        <a href="/funcionarios/add/">Adicionar novo Funcionário</a>  <!--links para rotas de alteração-->
-        <a href="/funcionarios/edit/">Editar Lista</a>
+        <a href="/funcionarios/add/">Adicionar novo Funcionário</a> 
     </div>
 
 </div>
