@@ -29,11 +29,11 @@
         <tbody>
             {% for f in funcionarios %} <!-- Loop para listar os funcionários -->
             <tr>
-                <td>{{ f.name }}</td>     <!-- nome do funcionario-->
-                <td>{{ f.email }}</td>    <!-- email do funcionario-->
-                <td>{{ f.adress }}</td>   <!-- endereço do funcionario-->
-                <td>{{ f.phone }}</td>    <!-- telefone do funcionario-->
-                <td>{{ f.salary }}</td> 
+                <td>{{ f.name }}</td>       <!-- nome do funcionario-->
+                <td>{{ f.email }}</td>      <!-- email do funcionario-->
+                <td>{{ f.adress }}</td>  <!-- endereço do funcionario-->
+                <td>{{ f.phone }}</td>   <!-- telefone do funcionario-->
+                <td>{{ f.salary }}</td>  
                 <td>
                     {% for e in equipes %}
                         {% if e.id == f.team_id %}

@@ -83,7 +83,7 @@ def modstatus(obj_id):
 def perfil():
     id = session.get('id')
     func = func_rep.get_funcionario(id)
-    tipo = categorias_rep.get_categoria(func.type_id)
+    tipo = tipos_rep.get_tipo(func.type_id)
     equipe = equipes_rep.get_equipe(func.team_id)
     return render_template('perfil_w.html', func = func, tipo=tipo, equipe=equipe)
 

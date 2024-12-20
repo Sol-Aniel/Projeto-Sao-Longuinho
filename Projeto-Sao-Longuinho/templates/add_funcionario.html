@@ -12,29 +12,31 @@
         <div class="centered-div">
         <h1>Adicionar Funcionários</h1>
        <form action="/funcionarios/add/" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="nome" id="nome" required>
+            <label for="nome">Nome:</label> 
+            <input type="nome" id="nome" name="nome" required><br><br>
             <label for="email">Email:</label>
-            <input type="email" id="email" required> 
+            <input type="email" id="email" name="email" required> <br><br>
             <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" required>
+            <input type="tel" id="telefone" name="telefone" required><br><br>
             <label for="equipe_id">Equipe:</label>
-            <select id="equipe_id" name="equipe_id">
+            <select id="equipe_id" name="equipe_id"><br><br>
                 <option value="" disabled selected>Selecione uma Equipe</option>
                 {% for e in equipes %}
                 <option value="{{ e.id }}">{{ e.name }}</option>
                 {% endfor %}
-            </select>
+            </select><br><br>
             <label for="salario">Salário:</label>
-            <input type="number" step="100" id="salario" required> 
+            <input type="number" step="100" id="salario" name="salario" required> <br><br>
             <label for="endereco">Endereço:</label>
-            <input type="endereco" id="endereco" required>
+            <input type="endereco" id="endereco" name="endereco" required><br><br>
             <label for="tipo_id">Cargo:</label>
-            <select id="tipo_id" name="tipo_id" required>
+            <select id="tipo_id" name="tipo_id" required><br><br>
                 {% for t in tipos %}
                 <option value="{{ t.id }}">{{ t.name }}</option>
                 {% endfor %}
-            </select>
+            </select><br><br>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required><br><br>
             <button type="submit">Adicionar</button>
        </form>
        {% with messages = get_flashed_messages(with_categories=True) %}

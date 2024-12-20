@@ -39,6 +39,7 @@
     .funcoes {
         display: flex;
         gap: 20px;
+        padding-bottom: 10;
     }
     
     .funcoes a {
@@ -60,13 +61,17 @@
         outline-offset: 4px;
     }
     .title img {
-        position: absolute;
-        top: 30;
+        top: 5;
         left: 5;
         height: 40%;
         width: auto;
         object-fit: cover;
         z-index: -1; 
+    }
+    .title h1{
+        top:10;
+        left:5;
+
     }
     
 </style>
@@ -76,13 +81,14 @@
     <div class="title">
         <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" class="logo">
         <h1>Longuinho Finders</h1>
-        </div>
+    </div>
          <p>Bem vindo!</p>
         <div class="funcoes">
             <a href="/funcionarios">Funcionários</a>
             <a href="/solicitacoes">Solicitações</a>
             <a href="/equipes">Equipes</a>
             <a href="/logout">Sair</a>
+            <a href="/recentes">Últimas Atualizações</a>
         </div>
         {% with messages = get_flashed_messages(with_categories=True) %}
             <br>

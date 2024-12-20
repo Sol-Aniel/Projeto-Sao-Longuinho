@@ -110,7 +110,7 @@ def edit_perfil():
                 name_ = session.get('name')
                 resp = make_response(redirect(url_for('cliente.painel')))
                 c_name = "EDIT {}".format(name_)
-                c_value = "PERFIL {} EDITADOO".format(title)
+                c_value = "PERFIL {} EDITADOO".format(nome)
                 resp.set_cookie(c_name, c_value)
                 session['cookies'].append(f"{c_name}: {c_value}")
                 return resp

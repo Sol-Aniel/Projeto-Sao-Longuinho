@@ -85,19 +85,31 @@ def login():
                         flash(mensagem_, "sucess")
                     if validade:
                         flash(mensagem, "sucess")
-                    return redirect(url_for('cliente.painel'))
+                    name = session.get('name')
+                    resp = make_response(redirect(url_for('cliente.painel')))
+                    c_name = "LOGGING {}".format(name)
+                    c_value = "USUÁRIO {} ENTROU".format(name)
+                    resp.set_cookie(c_name, c_value)
+                    session['cookies'].append(f"{c_name}: {c_value}")
+                    return resp
                 elif acess == 'func':
                     flash('Login efetuado', 'success')
                     session['acess'] = acess
                     user = func_rep.get_funcionarios_by('email', email)
                     sessionuser(user[0])
-                    return redirect(url_for('func.painel_worker'))
+                    name = session.get('name')
+                    resp = make_response(redirect(url_for('func.painel_worker')))
+                    c_name = "LOGGING {}".format(name)
+                    c_value = "USUÁRIO {} ENTROU".format(name)
+                    resp.set_cookie(c_name, c_value)
+                    session['cookies'].append(f"{c_name}: {c_value}")
+                    return resp
                 else:
                     flash('Usuário não encontrado ou senha incorreta', 'danger')
                     return render_template("login.html")
             else:
                 flash("Você já está logado!", "danger")
-                return redirect(url_for('geraç.index'))
+                return redirect(url_for('geral.index'))
         else:
             return render_template('login.html')
 
@@ -144,8 +156,20 @@ def logout():
     if session:
         if request.method == 'POST':
             session.clear()
-            return redirect(url_for('geral.login'))
+            resp = make_response(redirect(url_for('geral.login')))
+            for cookie in request.cookies:
+                resp.delete_cookie(cookie)
+            session.pop('cookies', None)
+            return resp
         else:
             return render_template('logout.html')
     else:
         return redirect(url_for('geral.index'))
+    
+@geral.route('/recentes')
+def recentes():
+    if session:
+        rota = session.get('previous_route')
+        return render_template("recentes.html", rota=rota)
+    else:
+        return redirect(url_for("geral.index"))

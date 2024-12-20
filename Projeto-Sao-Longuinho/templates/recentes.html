@@ -12,9 +12,9 @@
         <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Longuinho Finders" class="object-photo">
 
         <div class="object-info">
-          {% for cookie in cookies %}
-            <p><strong>Ação:</strong> {{ cookie.key }}</p>
-            <p><strong>Categoria:</strong> {{ categoria.name }}</p>
+          {% for cookie_name, cookie_value in request.cookies.items() %}
+            <p><strong>Ação:</strong> {{ cookie_name }}</p>
+            <p><strong>Mudança:</strong> {{ cookie_value }}</p>
           {% endfor %}
         </div>
         <a href="{{ rota }}" class="back-button">Voltar</a>
