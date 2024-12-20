@@ -106,7 +106,7 @@ def aprovar(obj_id):
         resp = make_response(redirect(url_for('admin.solicitacoes')))
         c_name = "APPROVE {}".format(name_)
         obj = objetos_rep.get_objeto(obj_id)
-        c_value = "OBJETO {} APROVADO".format(obj.name)
+        c_value = "OBJETO {} APROVADO".format(obj.title)
         resp.set_cookie(c_name, c_value)
         session['cookies'].append(f"{c_name}: {c_value}")
         return resp

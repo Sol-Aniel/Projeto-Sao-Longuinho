@@ -16,17 +16,26 @@ body {
 }
 
 .centered-div {
-  
-  
+    justify-content: center; 
     background: #a4eba4; /* Fundo branco para destacar */
-    padding: 20px 30px; /* Espaçamento interno */
+    padding: 60px 200px; /* Espaçamento interno */
     border-radius: 8px; /* Bordas arredondadas */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
     text-align: center; /* Centraliza texto e elementos */
     width: 100%;
-    max-width: 10; /* Limita largura máxima */
+    max-width: 30%; 
+    height: 70%;/* Limita largura máxima */
     align-items: center;
-    
+    align-content: center;
+}
+
+.centered-div form {
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    align-self: center;
+
+    padding-right: 1000;
 }
 
 h1 {
@@ -52,6 +61,10 @@ p {
 
 .equipes-container {
     padding: 20px;
+    width: 100%;
+    padding: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .equipe {
@@ -156,14 +169,18 @@ img:hover {
 table {
     width: 100%;
     border-collapse: collapse; /* Remove espaçamento entre as células */
-    margin: 0 auto; /* Centraliza a tabela dentro do contêiner */
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    display: flex;
+    justify-content: center; /* Centraliza a tabela dentro do contêiner */
 }
 
 /* Estilo para as células da tabela */
 th, td {
     padding: 12px 15px; /* Espaçamento interno para as células */
     text-align: center; /* Alinha o conteúdo à esquerda */
-    font-size: 2rem; /* Tamanho de fonte legível */
+    font-size: 13px; /* Tamanho de fonte legível */
     color: #333; /* Cor do texto */
     border-bottom: 1px solid #ddd; /* Linha sutil para separar as linhas */
     transition: background-color 0.3s ease, color 0.3s ease; /* Efeito suave de transição */
