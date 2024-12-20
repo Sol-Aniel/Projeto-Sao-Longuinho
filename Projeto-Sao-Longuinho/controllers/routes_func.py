@@ -64,7 +64,14 @@ def modstatus(obj_id):
         sucesso = objetos_rep.update_found(obj_id, True)
         if sucesso == True:
             flash("Ojeto dado como achado.", "success")
-            return redirect(url_for('func.achados'))
+            name_ = session.get('name')
+            resp = make_response(redirect(url_for('func.achados')))
+            c_name = "UPDATE STATUS {}".format(name_)
+            obj = objetos_rep.get_objeto(obj_id)
+            c_value = "OBJETO {} DADO COMO ENCONTRADO".format(obj.title)
+            resp.set_cookie(c_name, c_value)
+            session['cookies'].append(f"{c_name}: {c_value}")
+            return resp
         else:
             flash(sucesso, "danger")
             return redirect(url_for('func.pendentes'))
@@ -100,7 +107,13 @@ def edit_perfil():
             sucesso = func_rep.mod_funcionario(func_id, name, team.id, type_.id, email, phone, salary, adress, senha)
             if sucesso == True:
                 flash('Seu perfil foi atualizado!', 'sucess')
-                return redirect(url_for('func.painel_worker'))
+                name_ = session.get('name')
+                resp = make_response(redirect(url_for('func.painel_worker')))
+                c_name = "EDIT {}".format(name_)
+                c_value = "PERFIL {} EDITADO".format(name_)
+                resp.set_cookie(c_name, c_value)
+                session['cookies'].append(f"{c_name}: {c_value}")
+                return resp
             else:
                 flash(sucesso, "danger")
                 return render_template('edit_perfil_w.html', func=func, tipo=tipo, equipe=equipe)
