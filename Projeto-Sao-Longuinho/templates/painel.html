@@ -12,8 +12,8 @@
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background:  linear-gradient(135deg, #3CB371, #90EE90);	;
         color: #fff;
+        background-color: rgb(47, 71, 44);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -60,15 +60,6 @@
         outline: 2px solid #fff;
         outline-offset: 4px;
     }
-    .title img {
-        position: absolute;
-        top: 30;
-        left: 5;
-        height: 40%;
-        width: auto;
-        object-fit: cover;
-        z-index: -1; /* Coloca a imagem atrás do conteúdo */
-    }
     
 </style>
 
@@ -78,12 +69,13 @@
         <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" class="logo">
         <h1>Longuinho Finders</h1>
         </div>
-         <p>Bem vindo!</p>
+         <h2>Bem vindo!</h2>
         <div class="funcoes">
            <a href="/solicitar">Solicitar</a>
            <a href="/pedidos">Pedidos</a>
            <a href="/perfil">Perfil</a>
            <a href="/logout">Sair</a>
+           <a href="/recentes">Últimas Atualizações</a>
         </div>
         {% with messages = get_flashed_messages(with_categories=True) %}
             <br>

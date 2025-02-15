@@ -11,18 +11,31 @@ body {
     align-items: center;
     min-height: 100vh; /* Altura mínima para ocupar a tela toda */
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9; /* Fundo suave */
+    background-color: #61b15e; /* Fundo suave */
     color: #333;
 }
 
 .centered-div {
-    background: #ffffff; /* Fundo branco para destacar */
-    padding: 20px 30px; /* Espaçamento interno */
+    justify-content: center; 
+    background: #a4eba4; /* Fundo branco para destacar */
+    padding: 60px 200px; /* Espaçamento interno */
     border-radius: 8px; /* Bordas arredondadas */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
     text-align: center; /* Centraliza texto e elementos */
     width: 100%;
-    max-width: 400px; /* Limita largura máxima */
+    max-width: 30%; 
+    height: 70%;/* Limita largura máxima */
+    align-items: center;
+    align-content: center;
+}
+
+.centered-div form {
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    align-self: center;
+
+    padding-right: 1000;
 }
 
 h1 {
@@ -48,6 +61,10 @@ p {
 
 .equipes-container {
     padding: 20px;
+    width: 100%;
+    padding: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .equipe {
@@ -95,8 +112,106 @@ li {
 .logo{
 width: 500px;
 height: auto;
+align-self: auto;
 }
 
 .back-button:hover {
     background-color: #0056b3;
 }
+/* Contêiner das imagens */
+.container-imagens {
+    display: flex;
+    flex-wrap: wrap; /* Para as imagens quebrarem de linha quando necessário */
+    gap: 20px; /* Espaço entre as imagens */
+    justify-content: center; /* Centraliza as imagens */
+    padding: 20px;
+}
+
+/* Imagens */
+/* Contêiner das imagens */
+img {
+    display: flex; /* Usando Flexbox */
+    justify-content: center; /* Centraliza as imagens horizontalmente */
+    align-items: center;  /* Usando grid para melhor controle do layout */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cria colunas automáticas, cada uma com no mínimo 200px */
+    gap: 20px; /* Espaço entre as imagens */
+    justify-items: center; /* Alinha as imagens no centro da célula */
+    padding: 20px;
+    max-width: 100%; /* Garante que o contêiner ocupe todo o espaço disponível */
+    box-sizing: border-box;
+}
+
+/* Imagens */
+ img {
+    width: 100%; /* Garante que as imagens ocupem toda a largura da célula */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para as imagens */
+    transition: transform 0.3s ease; /* Efeito de transição suave no hover */
+}
+
+img:hover {
+    transform: scale(1.05); /* Aumenta um pouco o tamanho da imagem ao passar o mouse */
+}
+
+/* Estilo para o contêiner da tabela */
+.table-container {
+    width: 100%;
+    max-width: 1200px; /* Limita a largura máxima da tabela */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Cor de fundo suave para o contêiner */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor do contêiner */
+    overflow: hidden; /* Garante que as bordas arredondadas não sejam cortadas */
+}
+
+/* Estilo para a tabela */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaçamento entre as células */
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    display: flex;
+    justify-content: center; /* Centraliza a tabela dentro do contêiner */
+}
+
+/* Estilo para as células da tabela */
+th, td {
+    padding: 12px 15px; /* Espaçamento interno para as células */
+    text-align: center; /* Alinha o conteúdo à esquerda */
+    font-size: 13px; /* Tamanho de fonte legível */
+    color: #333; /* Cor do texto */
+    border-bottom: 1px solid #ddd; /* Linha sutil para separar as linhas */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Efeito suave de transição */
+}
+
+/* Estilo para o cabeçalho da tabela */
+th {
+    background-color: #004c00; /* Cor de fundo do cabeçalho */
+    color: #fff; /* Cor do texto no cabeçalho */
+    font-weight: bold; /* Deixa o texto mais forte */
+    text-transform: uppercase; /* Maiúsculas no cabeçalho */
+}
+
+/* Efeito de hover nas células */
+tr:hover {
+    background-color: #f4f4f4; /* Cor de fundo ao passar o mouse sobre a linha */
+}
+
+/* Estilo das linhas alternadas */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Cor de fundo para linhas pares */
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* Cor de fundo para linhas ímpares */
+}
+
+/* Estilo para as células de destaque (por exemplo, totais ou importantes) */
+td.highlight, th.highlight {
+    background-color: #ffcc00; /* Cor de fundo amarelo para destaque */
+    color: #000; /* Cor do texto de destaque */
+    font-weight: bold; /* Torna o texto em negrito */
+}
+

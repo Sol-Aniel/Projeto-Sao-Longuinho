@@ -32,9 +32,9 @@ def pendentes():
     func_id = session.get('id')
     func = func_rep.get_funcionario(func_id)
     equipe = equipes_rep.get_equipe(func.team_id)
-    for o in objetos_pendentes:
-        if o.team_id != equipe.id:
-            objetos.remove(o)
+    for o in objetos_pendentes[:]:
+        if o.team_id != equipe.id or o.price == None:
+            objetos_pendentes.remove(o)
     categorias = categorias_rep.get_categorias()
     clientes = clientes_rep.get_clientes()
     equipes = equipes_rep.get_equipes()
@@ -43,17 +43,16 @@ def pendentes():
 @funcionarios.route('/achados')
 def achados():
     objetos_achados = objetos_rep.get_objetos_by('found', True)
-    objetos = objetos_achados
     func_id = session.get('id')
     func = func_rep.get_funcionario(func_id)
     equipe = equipes_rep.get_equipe(func.team_id)
-    for o in objetos_achados:
-        if o.team_id != equipe.id:
-            objetos.remove(o)
+    for o in objetos_achados[:]:
+        if (o.team_id != equipe.id):
+            objetos_achados.remove(o)
     categorias = categorias_rep.get_categorias()
     clientes = clientes_rep.get_clientes()
     equipes = equipes_rep.get_equipes()
-    return render_template('achados.html', clientes=clientes, equipes=equipes, categorias=categorias, objetos=objetos)
+    return render_template('achados.html', clientes=clientes, equipes=equipes, categorias=categorias, objetos=objetos_achados)
 
 @funcionarios.route('/alterar-status/<int:obj_id>', methods=['POST'])
 def modstatus(obj_id):
@@ -64,7 +63,14 @@ def modstatus(obj_id):
         sucesso = objetos_rep.update_found(obj_id, True)
         if sucesso == True:
             flash("Ojeto dado como achado.", "success")
-            return redirect(url_for('func.achados'))
+            name_ = session.get('name')
+            resp = make_response(redirect(url_for('func.achados')))
+            c_name = "UPDATE STATUS {}".format(name_)
+            obj = objetos_rep.get_objeto(obj_id)
+            c_value = "OBJETO {} DADO COMO ENCONTRADO".format(obj.title)
+            resp.set_cookie(c_name, c_value)
+            session['cookies'].append(f"{c_name}: {c_value}")
+            return resp
         else:
             flash(sucesso, "danger")
             return redirect(url_for('func.pendentes'))
@@ -76,7 +82,7 @@ def modstatus(obj_id):
 def perfil():
     id = session.get('id')
     func = func_rep.get_funcionario(id)
-    tipo = categorias_rep.get_categoria(func.type_id)
+    tipo = tipos_rep.get_tipo(func.type_id)
     equipe = equipes_rep.get_equipe(func.team_id)
     return render_template('perfil_w.html', func = func, tipo=tipo, equipe=equipe)
 
@@ -100,7 +106,13 @@ def edit_perfil():
             sucesso = func_rep.mod_funcionario(func_id, name, team.id, type_.id, email, phone, salary, adress, senha)
             if sucesso == True:
                 flash('Seu perfil foi atualizado!', 'sucess')
-                return redirect(url_for('func.painel_worker'))
+                name_ = session.get('name')
+                resp = make_response(redirect(url_for('func.painel_worker')))
+                c_name = "EDIT {}".format(name_)
+                c_value = "PERFIL {} EDITADO".format(name_)
+                resp.set_cookie(c_name, c_value)
+                session['cookies'].append(f"{c_name}: {c_value}")
+                return resp
             else:
                 flash(sucesso, "danger")
                 return render_template('edit_perfil_w.html', func=func, tipo=tipo, equipe=equipe)

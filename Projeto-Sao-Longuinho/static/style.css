@@ -9,7 +9,8 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #7ed956;
+    
 }
 
 /* Menu */
@@ -17,15 +18,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 15px 30px;
     background-color: #004c00;
     color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Logo */
 .logo img {
     width: 50px;
     height: auto;
+    align-content: center;
+    align-self: center;
+    display: flex; /* Usando Flexbox */
+    justify-content: center; /* Centraliza as imagens horizontalmente */
+    align-items: center;  /* Usando grid para melhor controle do layout */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Barra de navegação */
@@ -80,7 +89,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    background-color: #7ed956;
     color: #fff;
     display: flex;
     align-items: center;
@@ -89,23 +98,17 @@ body {
 }
 
 /* Imagem no canto esquerdo preenchendo toda a vertical */
-.title img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    z-index: -1; /* Coloca a imagem atrás do conteúdo */
-}
 
 /* Centralizar div exibir */
 .exibir {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    width: 90%;
 }
 
 .exibir h2 {
@@ -117,20 +120,21 @@ body {
 .exibir table {
     margin: 0 auto;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
 }
 
 .exibir td {
-    padding: 10px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     font-size: 1rem;
 }
 
+/* Ajuste de estilo para a seção título */
 .title {
-    margin-bottom: 20px;
     text-align: center;
+    padding: 100px 50px;
 }
 
 .title h1 {
@@ -144,40 +148,57 @@ p {
     margin-bottom: 30px;
 }
 
+/* Estilo para botões */
 .funcoes {
     display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
     gap: 20px;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #333;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 
 .funcoes a {
     text-decoration: none;
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
+    padding: 12px 30px;
     border-radius: 8px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .funcoes a:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(1.05);
+    background: rgba(11, 187, 4, 0.205);
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(27, 94, 1, 0.3);
 }
 
 .funcoes a:focus {
-    outline: 2px solid #fff;
+    outline: 3px solid #fff;
     outline-offset: 4px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
 }
+
+/* Estilo para a seção de alteração */
 .alterar a {
     text-decoration: none;
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 8px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 16px;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .alterar a:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(11, 121, 1, 0.164);
     transform: scale(1.05);
 }
 
@@ -186,12 +207,12 @@ p {
     outline-offset: 4px;
 }
 
-/* Container principal para a tabela */
+/* Estilo da tabela dentro do container */
 .container {
     width: 100%;
-    max-width: 10000px;
+    max-width: 1000px;
     margin: 50px auto;
-    padding: 15px;
+    padding: 20px;
     background-color: #38412a;
     border: 1px solid #ffccbc;
     border-radius: 8px;
@@ -201,15 +222,13 @@ p {
     align-items: center;
     gap: 20px;
 }
-  
-/* Estilo da tabela */
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10px 0;
+    margin-top: 20px;
 }
 
-/* Estilo das células da tabela */
 th, td {
     padding: 15px;
     text-align: left;
@@ -217,7 +236,6 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-/* Estilo dos cabeçalhos */
 th {
     font-weight: bold;
     background-color: #bcffda;
@@ -225,12 +243,10 @@ th {
     text-align: center;
 }
 
-/* Estilo das linhas alternadas */
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* Efeito ao passar o mouse sobre as linhas */
 tr:hover {
     background-color: #e9f7e9;
 }

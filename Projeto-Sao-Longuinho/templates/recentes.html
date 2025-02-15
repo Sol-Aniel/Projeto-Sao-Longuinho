@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ações Recentes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='objeto.css') }}">
+</head>
+<body>
+    <div class="object-container">
+        <h1 class="object-title">Ações mais Recentes</h1>
+        <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Longuinho Finders" class="object-photo">
+
+        <div class="object-info">
+          {% for cookie_name, cookie_value in request.cookies.items() %}
+            <p><strong>Ação:</strong> {{ cookie_name }}</p>
+            <p><strong>Mudança:</strong> {{ cookie_value }}</p>
+          {% endfor %}
+        </div>
+        <a href="{{ rota }}" class="back-button">Voltar</a>
+    </div>
+</body>
+</html>

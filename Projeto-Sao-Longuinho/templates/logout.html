@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="title">
-        <h1>Confirmar Logout</h1>
+  
     </div>
     <br><br><br>
     <div class="exibir">
+        <h1>Confirmar Logout</h1>
         <h2>Você realmente deseja sair?</h2>
         <p>Se você sair, precisará fazer login novamente para acessar a sua conta.</p>
         
         <div class="funcoes">
-            <form action="/logout" method="POST">
-                <button type="submit" class="alterar">Sim, quero sair</a>
+            <form id="postForm" action="/logout" method="POST" style="display:none;">
+                <input type="hidden" name="chave" value="valor">
             </form>
+            <a href="#" onclick="document.getElementById('postForm').submit();" class="alterar">Sim, quero sair</a>
             <a href="/" class="alterar">Cancelar</a>
         </div>
-    </div>
+    
 
 </body>
 </html>

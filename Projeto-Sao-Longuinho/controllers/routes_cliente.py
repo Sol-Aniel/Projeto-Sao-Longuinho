@@ -33,7 +33,13 @@ def excluir_pedidos(obj_id):
         sucesso = objetos_rep.delete_objeto(obj_id)
         if sucesso == True:
             flash("Objeto excluído com sucesso", "success")
-            return redirect(url_for('cliente.pedidos'))
+            name_ = session.get('name')
+            resp = make_response(redirect(url_for('cliente.pedidos')))
+            c_name = "DELETE {}".format(name_)
+            c_value = "PEDIDO {} EXCLUÍDO".format(obj.title)
+            resp.set_cookie(c_name, c_value)
+            session['cookies'].append(f"{c_name}: {c_value}")
+            return resp
         else:
             flash(sucesso, "danger")
             return redirect(url_for('cliente.pedidos'))
@@ -63,7 +69,13 @@ def solicitar():
         sucesso = objetos_rep.add_objeto(title, photo, client_id, category_id, description, team_id, found, plural, size, weight, lost_local, lost_date, comments, price)
         if sucesso == True:  
             flash('Objeto adicionado! Aguarde aprovação de busca', 'sucess')
-            return redirect(url_for('cliente.painel'))
+            name_ = session.get('name')
+            resp = make_response(redirect(url_for('cliente.painel')))
+            c_name = "ADD {}".format(name_)
+            c_value = "PEDIDO {} ADIONADO".format(title)
+            resp.set_cookie(c_name, c_value)
+            session['cookies'].append(f"{c_name}: {c_value}")
+            return resp
         else: 
             flash(sucesso, "danger")
             categorias = categorias_rep.get_categorias()
@@ -95,7 +107,13 @@ def edit_perfil():
             sucesso = clientes_rep.mod_cliente(id, nome, email, telefone, nacionalidade, endereco, senha)
             if sucesso == True:
                 flash('Seu perfil foi atualizado!', 'sucess')
-                return redirect(url_for('cliente.painel'))
+                name_ = session.get('name')
+                resp = make_response(redirect(url_for('cliente.painel')))
+                c_name = "EDIT {}".format(name_)
+                c_value = "PERFIL {} EDITADOO".format(nome)
+                resp.set_cookie(c_name, c_value)
+                session['cookies'].append(f"{c_name}: {c_value}")
+                return resp
             else:
                 flash(sucesso, "danger")
                 return render_template('editar_perfil.html', cliente = cliente)

@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='geral.css') }}">
 </head>
 <body>
-    <div class="centered-div">
+    <div class="centered-div" >
         <h3>Deseja editar suas informações de cadastro?</h3>
-        <form method="POST" action="/edit/perfil">
+        <form method="POST" action="/edit/perfil" >
             <label for="nome">Nome:</label>
             <input type="text" name="nome" id="nome" value="{{ cliente.name }}">
             <label for="nacionalidade">Nacionalidade:</label>
@@ -20,7 +20,7 @@
             <input type="text" name="endereco" id="endereco" value="{{ cliente.adress }}">
             <label for="telefone">Telefone:</label>
             <input type="tel" name="telefone" id="telefone" value="{{ cliente.phone }}">
-            <label for="password_hash">Telefone:</label>
+            <label for="password_hash">Senha:</label>
             <input type="password" name="senha" id="password_hash">
             <button type="submit">Salvar</button>
         </form>

@@ -60,7 +60,7 @@ def setData ():
     if len(clientes) == 0:
         clientes_rep.add_cliente('Sol', 'sol@gmail.com', '11 96639-5228', 'Brasileira', 'Rua Giuseppe Cadura, 69', 'Qw1@@@@@')
     if len(objetos) == 0:
-        caminho_imagem = 'GitLonguinho/Projeto-Sao-Longuinho/static/images/buraco_negro.jpeg'
+        caminho_imagem = './GitLonguinho/Projeto-Sao-Longuinho/static/images/buraco_negro.jpeg'
         with open(caminho_imagem, 'rb') as f:
             buraco_negro = f.read()
         lost_date = '0001-01-01'
